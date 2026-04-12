@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<title>樊登說書</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'LXGW WenKai TC', serif; color: #3a2a1a; background: #fff; }
+  img { max-width: 100%; display: block; }
+
+  /* ===== Hero ===== */
+  .hero {
+    background: #fff;
+    text-align: center;
+    padding: 28px 20px 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Animated golden glow behind portrait */
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 60%;
+    background: radial-gradient(ellipse at center bottom, rgba(212,180,90,0.35) 0%, rgba(212,180,90,0.12) 40%, transparent 70%);
+    animation: glowPulse 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.08); }
+  }
+
+  /* Floating particles */
+  .hero-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .hero-particles span {
+    position: absolute;
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: rgba(200,168,72,0.3);
+    border-radius: 50%;
+    animation: particleFloat linear infinite;
+  }
+  .hero-particles span:nth-child(1) { left: 10%; width: 4px; height: 4px; animation-duration: 7s; animation-delay: 0s; }
+  .hero-particles span:nth-child(2) { left: 25%; width: 6px; height: 6px; animation-duration: 9s; animation-delay: 1s; }
+  .hero-particles span:nth-child(3) { left: 40%; width: 3px; height: 3px; animation-duration: 6s; animation-delay: 2s; }
+  .hero-particles span:nth-child(4) { left: 55%; width: 5px; height: 5px; animation-duration: 8s; animation-delay: 0.5s; }
+  .hero-particles span:nth-child(5) { left: 70%; width: 4px; height: 4px; animation-duration: 10s; animation-delay: 3s; }
+  .hero-particles span:nth-child(6) { left: 85%; width: 7px; height: 7px; animation-duration: 7.5s; animation-delay: 1.5s; }
+  .hero-particles span:nth-child(7) { left: 15%; width: 5px; height: 5px; animation-duration: 8.5s; animation-delay: 4s; }
+  .hero-particles span:nth-child(8) { left: 60%; width: 3px; height: 3px; animation-duration: 6.5s; animation-delay: 2.5s; }
+
+  @keyframes particleFloat {
+    0%   { bottom: -10%; opacity: 0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.6; }
+    100% { bottom: 110%; opacity: 0; }
+  }
+
+  .hero-text, .hero .portrait-area {
+    position: relative;
+    z-index: 1;
+  }
+  .hero-text h1 {
+    font-size: 26px;
+    font-weight: 900;
+    color: #2a1a0a;
+    letter-spacing: 3px;
+  }
+  .hero-text .subtitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2a1a0a;
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+  .hero-text .tagline {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #c8a040 0%, #8a6a2a 100%);
+    border-radius: 30px;
+    padding: 10px 28px;
+    margin-top: 12px;
+    position: relative;
+    letter-spacing: 1px;
+  }
+  .hero-text .tagline::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #8a6a2a;
+  }
+  .hero .portrait-area {
+    position: relative;
+    margin-top: 20px;
+  }
+  .hero .portrait-composition {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0;
+  }
+  .hero .portrait-left {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    padding-bottom: 15%;
+  }
+  .hero .portrait-label {
+    writing-mode: vertical-rl;
+    font-size: 14px;
+    color: #6b5a3e;
+    letter-spacing: 4px;
+    line-height: 1.6;
+  }
+  .hero .portrait-label .name {
+    writing-mode: vertical-rl;
+    font-size: 42px;
+    font-weight: 900;
+    color: #5a3a1a;
+    letter-spacing: 8px;
+  }
+  .hero .portrait-center {
+    flex: 0 0 55%;
+    position: relative;
+  }
+  .hero .portrait-img {
+    width: 100%;
+    display: block;
+  }
+  .hero .sign-img {
+    position: absolute;
+    bottom: 10%;
+    right: -15%;
+    width: 45%;
+  }
+
+  /* ===== Desktop ===== */
+  @media (min-width: 768px) {
+    .page-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .hero { padding: 40px 60px 0; }
+    .hero-text h1 { font-size: 36px; }
+    .hero-text .subtitle { font-size: 26px; }
+    .hero-text .tagline { font-size: 18px; padding: 12px 36px; }
+    .hero .portrait-composition { max-width: 600px; margin: 0 auto; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-particles">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="hero-text">
+      <h1>堅持推動閱讀</h1>
+      <p class="subtitle">台灣 200+ 創作者支持</p>
+      <span class="tagline">12年讀書專家，累積百億播放量</span>
+    </div>
+    <div class="portrait-area">
+      <div class="portrait-composition">
+        <div class="portrait-left">
+          <div class="portrait-label">
+            帆書APP創始人
+          </div>
+          <div class="portrait-label name">樊登</div>
+        </div>
+        <div class="portrait-center">
+          <img class="portrait-img" src="images/Hero/樊登.svg" alt="樊登">
+          <img class="sign-img" src="images/Hero/sign.svg" alt="簽名">
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
