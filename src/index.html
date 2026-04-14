@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&amp;display=swap" rel="stylesheet">
 <title>樊登說書</title>
 <script>document.documentElement.classList.add('motion-ready');</script>
 <style>
@@ -53,18 +53,18 @@
     color: #402611;
   }
   .top-nav-brand-mark {
-    width: 2.7rem;
-    height: 2.7rem;
-    border-radius: 0.95rem;
-    display: grid;
-    place-items: center;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #fffdf8;
-    background: linear-gradient(145deg, #d2a24d 0%, #b88231 48%, #8f6222 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.34),
-      0 10px 18px rgba(143, 98, 34, 0.18);
+    width: 3rem;
+    height: 3rem;
+    flex: 0 0 auto;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: #ffca15;
+    box-shadow: 0 10px 18px rgba(143, 98, 34, 0.14);
+  }
+  .top-nav-brand-mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .top-nav-brand-text {
     display: flex;
@@ -72,15 +72,12 @@
     line-height: 1.05;
   }
   .top-nav-brand-title {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
   }
   .top-nav-brand-subtitle {
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    color: #9a7540;
-    text-transform: uppercase;
+    display: none;
   }
   .top-nav-links {
     display: flex;
@@ -297,7 +294,7 @@
   .email-modal-panel {
     position: relative;
     width: min(100%, 34rem);
-    padding: 1.5rem 1.35rem 1.25rem;
+    padding: 1.7rem 1.35rem 1.3rem;
     border-radius: 1.75rem;
     border: 1px solid rgba(205, 162, 81, 0.28);
     background:
@@ -312,6 +309,7 @@
     transition:
       opacity 320ms cubic-bezier(0.22, 1, 0.36, 1),
       transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    text-align: center;
   }
   .email-modal-close {
     position: absolute;
@@ -334,6 +332,7 @@
     align-items: center;
     gap: 0.45rem;
     padding: 0.38rem 0.82rem 0.42rem;
+    margin: 0 auto;
     border-radius: 999px;
     background: rgba(255, 239, 185, 0.78);
     color: #9b6120;
@@ -358,33 +357,37 @@
     letter-spacing: 0.03em;
   }
   .email-modal-copy {
-    margin-top: 0.6rem;
+    max-width: 28rem;
+    margin: 0.75rem auto 0;
     font-size: clamp(1rem, 2.9vw, 1.2rem);
     line-height: 1.55;
     color: #6a5841;
     font-weight: 700;
   }
   .email-modal-prizes {
-    margin-top: 0.95rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.55rem;
+    width: min(100%, 29rem);
+    margin: 1rem auto 0;
+    display: grid;
+    gap: 0.6rem;
   }
   .email-modal-prize {
-    padding: 0.48rem 0.78rem 0.52rem;
-    border-radius: 999px;
+    padding: 0.72rem 0.9rem 0.78rem;
+    border-radius: 1rem;
     background: rgba(255, 255, 255, 0.88);
     border: 1px solid rgba(220, 183, 109, 0.54);
     color: #7a541f;
-    font-size: 0.92rem;
+    font-size: 0.98rem;
+    line-height: 1.5;
     font-weight: 700;
   }
   .email-capture-form {
-    margin-top: 1.15rem;
+    width: min(100%, 29rem);
+    margin: 1.2rem auto 0;
   }
   .email-capture-label {
     display: block;
     margin-bottom: 0.42rem;
+    text-align: left;
     color: #7d6238;
     font-size: 0.88rem;
     font-weight: 700;
@@ -404,6 +407,7 @@
     background: rgba(255, 255, 255, 0.94);
     color: #4e3414;
     font: inherit;
+    text-align: center;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.72);
   }
   .email-capture-input:focus {
@@ -414,6 +418,7 @@
       inset 0 1px 0 rgba(255,255,255,0.82);
   }
   .email-capture-submit {
+    width: 100%;
     padding: 0.95rem 1.15rem;
     border: 0;
     border-radius: 1rem;
@@ -430,8 +435,8 @@
   .email-capture-meta {
     margin-top: 0.7rem;
     color: #8a7150;
-    font-size: 0.82rem;
-    line-height: 1.55;
+    font-size: 0.84rem;
+    line-height: 1.7;
   }
   .email-capture-feedback {
     min-height: 1.4em;
@@ -477,10 +482,9 @@
       gap: 0.75rem;
     }
     .top-nav-brand-mark {
-      width: 2.35rem;
-      height: 2.35rem;
+      width: 2.5rem;
+      height: 2.5rem;
       border-radius: 0.85rem;
-      font-size: 1.05rem;
     }
     .top-nav-brand-title {
       font-size: 1rem;
@@ -709,28 +713,32 @@
     position: relative;
     z-index: 1;
   }
+  .intro-hero-copy {
+    max-width: 52rem;
+    margin: 0 auto;
+  }
   .intro-hero-heading {
-    font-size: clamp(2rem, 6vw, 3.25rem);
+    font-size: clamp(1.9rem, 5.8vw, 3.15rem);
     font-weight: 900;
     color: #2a1a0a;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.04em;
     line-height: 1.16;
   }
   .intro-hero-subtitle {
-    margin-top: 0.35rem;
-    font-size: clamp(1.3rem, 4.2vw, 2.1rem);
+    margin-top: 0.8rem;
+    font-size: clamp(1.15rem, 3.9vw, 2rem);
     font-weight: 700;
-    color: #2a1a0a;
-    letter-spacing: 0.08em;
+    color: #6e4d1c;
+    letter-spacing: 0.04em;
   }
   .intro-hero-tagline {
     display: inline-block;
-    margin-top: 0.9rem;
-    padding: 0.7rem 1.7rem 0.78rem;
+    margin-top: 1rem;
+    padding: 0.78rem 1.65rem 0.86rem;
     border-radius: 999px;
     background: linear-gradient(135deg, #c8a040 0%, #8a6a2a 100%);
     color: #fff;
-    font-size: clamp(1rem, 2.7vw, 1.35rem);
+    font-size: clamp(0.98rem, 2.6vw, 1.28rem);
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: 0.03em;
@@ -755,19 +763,11 @@
     margin-top: 1.6rem;
   }
   .intro-hero-composition {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 0;
-    max-width: 36rem;
+    max-width: 26rem;
     margin: 0 auto;
   }
   .intro-hero-left {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: flex-end;
-    gap: 0.55rem;
-    padding-bottom: 11%;
+    display: none;
   }
   .intro-hero-label,
   .intro-hero-name {
@@ -794,7 +794,7 @@
     letter-spacing: 0.12em;
   }
   .intro-hero-center {
-    flex: 0 0 55%;
+    width: 100%;
     position: relative;
   }
   .intro-hero-image {
@@ -844,7 +844,7 @@
   .feature-icon-wrap {
     position: relative;
     z-index: 2;
-    width: clamp(58px, 18vw, 90px);
+    width: clamp(62px, 19vw, 94px);
     margin: 0 auto -6px;
     filter: drop-shadow(0 8px 12px rgba(109, 70, 21, 0.18));
   }
@@ -1001,7 +1001,7 @@
     left: -30px;
     top: -24px;
     z-index: 3;
-    width: 70px;
+    width: 82px;
     height: auto;
     filter: drop-shadow(0 8px 10px rgba(160, 120, 48, 0.22));
     transform-origin: 58% 72%;
@@ -1300,7 +1300,7 @@
     z-index: 3;
     left: 24px;
     top: -32px;
-    width: 54px;
+    width: 64px;
     height: auto;
     pointer-events: none;
     filter: drop-shadow(0 8px 12px rgba(158, 119, 53, 0.18));
@@ -1334,7 +1334,98 @@
     line-height: 1.28;
     font-weight: 700;
     color: #6a6863;
-    word-break: break-word;
+    word-break: keep-all;
+  }
+  .domain-book-title--tight {
+    font-size: clamp(7px, 1.55vw, 13px);
+    line-height: 1.2;
+    letter-spacing: -0.05em;
+    white-space: nowrap;
+  }
+
+  /* ===== Event Preview ===== */
+  .event-preview {
+    position: relative;
+    overflow: hidden;
+    padding: 38px 14px 54px;
+    background:
+      radial-gradient(52% 34% at 14% 18%, rgba(255, 244, 196, 0.72) 0%, rgba(255, 244, 196, 0.18) 56%, transparent 78%),
+      radial-gradient(34% 24% at 88% 10%, rgba(255, 253, 243, 0.88) 0%, rgba(255, 253, 243, 0.14) 58%, transparent 78%),
+      linear-gradient(180deg, #fff8e8 0%, #f4dc9e 100%);
+  }
+  .event-preview-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 2.1rem 1.3rem 2rem;
+    text-align: center;
+    border-radius: 2rem;
+    border: 1px solid rgba(190, 148, 69, 0.28);
+    background:
+      radial-gradient(90% 120% at 50% 0%, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.08) 54%, rgba(255, 255, 255, 0) 100%),
+      linear-gradient(180deg, rgba(255, 253, 245, 0.98) 0%, rgba(255, 244, 214, 0.98) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.84),
+      0 1.2rem 2.5rem rgba(158, 119, 53, 0.16);
+  }
+  .event-preview-kicker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.48rem 0.95rem 0.54rem;
+    border-radius: 999px;
+    background: rgba(255, 237, 173, 0.8);
+    color: #9b6120;
+    font-size: clamp(0.88rem, 2.6vw, 1rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+  .event-preview-title {
+    margin-top: 1rem;
+    font-size: clamp(1.9rem, 5.4vw, 3rem);
+    line-height: 1.12;
+    font-weight: 900;
+    color: #6d4314;
+    letter-spacing: 0.04em;
+  }
+  .event-preview-copy {
+    max-width: 36rem;
+    margin: 1rem auto 0;
+    font-size: clamp(1rem, 3vw, 1.32rem);
+    line-height: 1.7;
+    font-weight: 700;
+    color: #5f4a2b;
+  }
+  .event-preview-note {
+    margin-top: 0.95rem;
+    font-size: clamp(1.06rem, 3.2vw, 1.42rem);
+    line-height: 1.5;
+    font-weight: 700;
+    color: #9b6120;
+  }
+  .event-preview-cta {
+    margin-top: 1.4rem;
+    padding: 1rem 1.6rem;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #d3a548 0%, #ad7426 100%);
+    color: #fffdf7;
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.24),
+      0 0.9rem 1.6rem rgba(160, 116, 38, 0.18);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+  .event-preview-cta:hover {
+    transform: translateY(-0.08rem);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.24),
+      0 1.1rem 1.8rem rgba(160, 116, 38, 0.22);
   }
 
   /* ===== Footer: 訂閱聲明 ===== */
@@ -1438,7 +1529,7 @@
       border-radius: 20px;
     }
     .compare-badge {
-      width: 54px;
+      width: 62px;
       left: -16px;
       top: -16px;
     }
@@ -1488,13 +1579,30 @@
     .domain-icon {
       left: 18px;
       top: -28px;
-      width: 48px;
+      width: 56px;
     }
     .domain-books {
       gap: 8px;
     }
     .domain-book-title {
       margin-top: 7px;
+    }
+    .event-preview {
+      padding: 28px 10px 36px;
+    }
+    .event-preview-inner {
+      padding: 1.75rem 1rem 1.6rem;
+      border-radius: 1.5rem;
+    }
+    .event-preview-title {
+      margin-top: 0.82rem;
+    }
+    .event-preview-copy {
+      margin-top: 0.85rem;
+    }
+    .event-preview-cta {
+      width: 100%;
+      max-width: 20rem;
     }
     .subscription-note {
       padding: 30px 12px 34px;
@@ -1545,17 +1653,7 @@
       font-size: 1.35rem;
     }
     .intro-hero-composition {
-      max-width: 35rem;
-    }
-    .intro-hero-left {
-      gap: 0.7rem;
-      padding-bottom: 12%;
-    }
-    .intro-hero-label {
-      font-size: 1rem;
-    }
-    .intro-hero-name {
-      font-size: 3rem;
+      max-width: 28rem;
     }
     .features-icons { padding: 44px 24px 58px; }
     .features-grid {
@@ -1565,7 +1663,7 @@
       gap: 28px;
     }
     .feature-icon-wrap {
-      width: 86px;
+      width: 96px;
       margin-bottom: -8px;
     }
     .feature-shell {
@@ -1614,7 +1712,7 @@
       margin-top: 60px;
     }
     .compare-badge {
-      width: 78px;
+      width: 96px;
       left: -36px;
       top: -28px;
     }
@@ -1682,7 +1780,7 @@
     .domain-icon {
       left: 48px;
       top: -38px;
-      width: 72px;
+      width: 84px;
     }
     .domain-books {
       gap: 18px;
@@ -1690,6 +1788,26 @@
     .domain-book-title {
       margin-top: 12px;
       font-size: 17px;
+    }
+    .event-preview {
+      padding: 56px 28px 70px;
+    }
+    .event-preview-inner {
+      padding: 2.8rem 2.5rem 2.55rem;
+      border-radius: 2.25rem;
+    }
+    .event-preview-title {
+      font-size: 3.2rem;
+    }
+    .event-preview-copy {
+      font-size: 1.28rem;
+    }
+    .event-preview-note {
+      font-size: 1.38rem;
+    }
+    .event-preview-cta {
+      font-size: 1.06rem;
+      padding: 1.05rem 1.9rem;
     }
     .subscription-note {
       padding: 52px 28px 58px;
@@ -1716,18 +1834,18 @@
 <header class="top-nav">
   <div class="top-nav-inner">
     <a class="top-nav-brand" href="#home" aria-label="回到首頁">
-      <span class="top-nav-brand-mark">帆</span>
+      <span class="top-nav-brand-mark">
+        <img src="images/logo.png" alt="樊登說書標誌">
+      </span>
       <span class="top-nav-brand-text">
-        <span class="top-nav-brand-title">帆書</span>
-        <span class="top-nav-brand-subtitle">Fanbook Taiwan</span>
+        <span class="top-nav-brand-title">樊登說書</span>
       </span>
     </a>
     <nav class="top-nav-links" aria-label="主導覽">
       <a href="#home">首頁</a>
-      <a href="#features">三大特色</a>
-      <a href="#impact">如何幫助你</a>
-      <a href="#domains">7大領域</a>
-      <a href="#terms">訂閱說明</a>
+      <a href="#about">樊登簡介</a>
+      <a href="#app-features">樊登說書APP特色</a>
+      <a href="#event">活動預告</a>
     </nav>
     <div class="top-nav-actions">
       <button class="top-nav-menu-btn" type="button" aria-label="開啟選單" aria-expanded="false" aria-controls="nav-drawer">
@@ -1745,32 +1863,31 @@
       </div>
       <nav class="nav-drawer-links" aria-label="手機選單">
         <a href="#home">首頁</a>
-        <a href="#features">三大特色</a>
-        <a href="#impact">如何幫助你</a>
-        <a href="#domains">7大領域</a>
-        <a href="#terms">訂閱說明</a>
+        <a href="#about">樊登簡介</a>
+        <a href="#app-features">樊登說書APP特色</a>
+        <a href="#event">活動預告</a>
       </nav>
     </div>
   </aside>
   <div class="email-modal-backdrop" hidden></div>
   <div class="email-modal" aria-hidden="true" aria-labelledby="emailModalTitle" role="dialog" aria-modal="true">
     <div class="email-modal-panel">
-      <button class="email-modal-close" type="button" aria-label="關閉抽獎彈窗">×</button>
-      <div class="email-modal-kicker">限時抽獎</div>
-      <h2 class="email-modal-title" id="emailModalTitle">填信箱抽《主角模式》限定版</h2>
-      <p class="email-modal-copy">再加碼送帆布袋＋書籤，讓閱讀的儀式感一次到位。</p>
+      <button class="email-modal-close" type="button" aria-label="關閉預約彈窗">×</button>
+      <div class="email-modal-kicker">4/23 樊登年度直播！限量99份好禮！</div>
+      <h2 class="email-modal-title" id="emailModalTitle">馬上填寫信箱，三重好禮等你拿</h2>
+      <p class="email-modal-copy">現在留下 Email，預約直播拿三重好禮。</p>
       <div class="email-modal-prizes" aria-hidden="true">
-        <span class="email-modal-prize">主角模式限定版</span>
-        <span class="email-modal-prize">帆布袋</span>
-        <span class="email-modal-prize">書籤</span>
+        <span class="email-modal-prize">第一重：樊登說書《納瓦爾寶典》影音＋心智圖</span>
+        <span class="email-modal-prize">第二重：樊登說書 APP 上線專屬優惠</span>
+        <span class="email-modal-prize">第三重：抽《主角模式》限定版及精美周邊（帆布袋、書籤）</span>
       </div>
       <form class="email-capture-form" novalidate>
         <label class="email-capture-label" for="giveawayEmail">Email</label>
         <div class="email-capture-row">
           <input class="email-capture-input" id="giveawayEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" required>
-          <button class="email-capture-submit" type="submit">我要參加抽獎</button>
+          <button class="email-capture-submit" type="submit">搶先登記，解鎖三大好禮</button>
         </div>
-        <p class="email-capture-meta">先做前端彈窗版型。你給我正式表單網址後，我再把送出流程接上。</p>
+        <p class="email-capture-meta">活動說明：4/20 搶先開放 APP 體驗，抽獎獲獎名單則於 4/23 透過 Email 公布，記得留意您的信箱</p>
         <p class="email-capture-feedback" aria-live="polite"></p>
       </form>
     </div>
@@ -1782,7 +1899,7 @@
     <div class="hero-media" data-reveal>
       <iframe
         src="https://www.youtube.com/embed/YgDH9DvZm_o?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=YgDH9DvZm_o&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;iv_load_policy=3&amp;fs=0&amp;playsinline=1"
-        title="帆書背景影片"
+        title="樊登說書背景影片"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
         loading="eager"
@@ -1790,28 +1907,20 @@
       ></iframe>
     </div>
     <div class="hero-overlay" data-reveal data-reveal-delay="80">
-      <h1 class="hero-title">帆書</h1>
-      <p class="hero-subtitle">人生如海，好書是帆</p>
+      <h1 class="hero-title">樊登說書</h1>
+      <p class="hero-subtitle">最有感的成長，從聽書開始</p>
     </div>
   </section>
 
   <!-- Original Intro Hero -->
-  <section class="intro-hero">
+  <section class="intro-hero" id="about">
     <div class="intro-hero-copy" data-reveal>
-      <h2 class="intro-hero-heading">堅持推動閱讀</h2>
-      <p class="intro-hero-subtitle">台灣 200+ 創作者支持</p>
-      <div class="intro-hero-tagline">12年讀書專家，累積百億播放量</div>
+      <h2 class="intro-hero-heading">樊登｜華文閱讀推廣代表</h2>
+      <p class="intro-hero-subtitle">台灣 200+ 創作者支持推薦</p>
+      <div class="intro-hero-tagline">13年說書經驗，影響全球超過 7,500萬讀者</div>
     </div>
     <div class="intro-hero-portrait" data-reveal data-reveal-delay="120">
       <div class="intro-hero-composition">
-        <div class="intro-hero-left">
-          <div class="intro-hero-label" aria-label="帆書 APP 創始人">
-            <span>帆書</span>
-            <span class="intro-hero-label-app">APP</span>
-            <span>創始人</span>
-          </div>
-          <div class="intro-hero-name">樊登</div>
-        </div>
         <div class="intro-hero-center">
           <img class="intro-hero-image" src="images/Hero/樊登.svg" alt="樊登">
           <img class="intro-hero-sign" src="images/Hero/sign.svg" alt="簽名">
@@ -1821,7 +1930,7 @@
   </section>
 
   <!-- 三大特色 -->
-  <section class="features-icons" id="features">
+  <section class="features-icons" id="app-features">
     <div class="features-grid">
       <article class="feature-card" data-reveal data-reveal-delay="0">
         <div class="feature-icon-wrap">
@@ -1856,7 +1965,7 @@
   <!-- 如何幫助你 / 比較表 -->
   <section class="impact-section" id="impact">
     <div class="impact-intro" data-reveal>
-      <h2 class="impact-title">〔樊登說書〕如何幫助你？</h2>
+      <h2 class="impact-title">【樊登說書】如何幫助你</h2>
       <div class="impact-divider"></div>
       <div class="impact-questions">
         <p>通勤時間，除了滑手機還能做什麼？</p>
@@ -1898,8 +2007,8 @@
   <!-- 暢聽 7 大領域 -->
   <section class="domains-showcase" id="domains">
     <div class="domains-head" data-reveal>
-      <h2 class="domains-heading">暢聽7大領域 解決人生問題</h2>
-      <div class="domains-pill">每年持續更新 52 本</div>
+      <h2 class="domains-heading">暢聽七大領域，解決人生問題</h2>
+      <div class="domains-pill">每週持續新書上架</div>
     </div>
 
     <div class="domains-list">
@@ -1913,7 +2022,7 @@
           </div>
           <div class="domain-book">
             <img src="images/職場商業/id228_一如既往.jpg" alt="一如既往">
-            <div class="domain-book-title">《一如既往》</div>
+            <div class="domain-book-title domain-book-title--tight">《一如既往》</div>
           </div>
           <div class="domain-book">
             <img src="images/個人成長/14_cover_反脆弱.jpg" alt="反脆弱">
@@ -1967,7 +2076,7 @@
           </div>
           <div class="domain-book">
             <img src="images/親子家庭/132_cover_哈佛媽媽的聰明3C教養法拷貝.png" alt="哈佛媽媽的聰明3C教養法">
-            <div class="domain-book-title">《哈佛媽媽的聰明3C教養法》</div>
+            <div class="domain-book-title domain-book-title--tight">《哈佛媽媽的聰明3C教養法》</div>
           </div>
         </div>
       </article>
@@ -1994,6 +2103,16 @@
           </div>
         </div>
       </article>
+    </div>
+  </section>
+
+  <section class="event-preview" id="event">
+    <div class="event-preview-inner" data-reveal>
+      <div class="event-preview-kicker">4/23 世界閱讀日年度演講</div>
+      <h2 class="event-preview-title">樂趣的力量</h2>
+      <p class="event-preview-copy">帶你一起，在閱讀中找到答案、找到力量、找到下一步</p>
+      <p class="event-preview-note">現在留下 Email，預約直播拿三重好禮</p>
+      <button class="event-preview-cta" type="button" data-open-email-modal>立即預約&gt;&gt;</button>
     </div>
   </section>
 
@@ -2026,6 +2145,7 @@
     var emailForm = document.querySelector('.email-capture-form');
     var emailInput = document.querySelector('.email-capture-input');
     var emailFeedback = document.querySelector('.email-capture-feedback');
+    var openEmailModalButtons = document.querySelectorAll('[data-open-email-modal]');
     var familyDomainPanel = null;
     var familyDomainPanels = document.querySelectorAll('.domain-panel');
     var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2173,6 +2293,12 @@
         });
       }
 
+      openEmailModalButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          openEmailModal();
+        });
+      });
+
       emailModalBackdrop.addEventListener('click', function () {
         closeEmailModal(true);
       });
@@ -2193,7 +2319,7 @@
             return;
           }
 
-          emailFeedback.textContent = '彈窗版型已就位。你給我正式表單網址後，我會把送出流程接上。';
+          emailFeedback.textContent = '登記完成，請留意 4/20 與 4/23 的 Email 通知。';
           writeStorage('fanbookGiveawayDraftEmail', emailInput.value.trim());
           window.setTimeout(function () {
             closeEmailModal(true);
