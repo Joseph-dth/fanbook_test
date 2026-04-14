@@ -349,9 +349,10 @@
     box-shadow: 0 0 0 0.25rem rgba(246, 202, 72, 0.16);
   }
   .email-modal-title {
-    margin-top: 1rem;
+    max-width: 24rem;
+    margin: 1rem auto 0;
     font-size: clamp(1.9rem, 5.4vw, 2.6rem);
-    line-height: 1.15;
+    line-height: 1.08;
     font-weight: 700;
     color: #6d4314;
     letter-spacing: 0.03em;
@@ -366,9 +367,9 @@
   }
   .email-modal-prizes {
     width: min(100%, 29rem);
-    margin: 1rem auto 0;
+    margin: 1.35rem auto 0;
     display: grid;
-    gap: 0.6rem;
+    gap: 0.72rem;
   }
   .email-modal-prize {
     padding: 0.72rem 0.9rem 0.78rem;
@@ -380,9 +381,13 @@
     line-height: 1.5;
     font-weight: 700;
   }
+  .email-modal-prize-note {
+    display: block;
+    margin-top: 0.08rem;
+  }
   .email-capture-form {
     width: min(100%, 29rem);
-    margin: 1.2rem auto 0;
+    margin: 1.55rem auto 0;
   }
   .email-capture-label {
     display: block;
@@ -435,7 +440,7 @@
   .email-capture-meta {
     margin-top: 0.7rem;
     color: #8a7150;
-    font-size: 0.84rem;
+    font-size: 0.76rem;
     line-height: 1.7;
   }
   .email-capture-feedback {
@@ -719,9 +724,9 @@
   }
   .intro-hero-heading {
     font-size: clamp(1.9rem, 5.8vw, 3.15rem);
-    font-weight: 900;
+    font-weight: 700;
     color: #2a1a0a;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
     line-height: 1.16;
   }
   .intro-hero-subtitle {
@@ -998,7 +1003,7 @@
   }
   .compare-badge {
     position: absolute;
-    left: -30px;
+    left: -18px;
     top: -24px;
     z-index: 3;
     width: 82px;
@@ -1530,7 +1535,7 @@
     }
     .compare-badge {
       width: 62px;
-      left: -16px;
+      left: -8px;
       top: -16px;
     }
     .compare-main .compare-header {
@@ -1713,7 +1718,7 @@
     }
     .compare-badge {
       width: 96px;
-      left: -36px;
+      left: -22px;
       top: -28px;
     }
     .compare-main .compare-header {
@@ -1874,12 +1879,12 @@
     <div class="email-modal-panel">
       <button class="email-modal-close" type="button" aria-label="關閉預約彈窗">×</button>
       <div class="email-modal-kicker">4/23 樊登年度直播！限量99份好禮！</div>
-      <h2 class="email-modal-title" id="emailModalTitle">馬上填寫信箱，三重好禮等你拿</h2>
+      <h2 class="email-modal-title" id="emailModalTitle">馬上填寫信箱，<br>三重好禮等你拿</h2>
       <p class="email-modal-copy">現在留下 Email，預約直播拿三重好禮。</p>
       <div class="email-modal-prizes" aria-hidden="true">
         <span class="email-modal-prize">第一重：樊登說書《納瓦爾寶典》影音＋心智圖</span>
         <span class="email-modal-prize">第二重：樊登說書 APP 上線專屬優惠</span>
-        <span class="email-modal-prize">第三重：抽《主角模式》限定版及精美周邊（帆布袋、書籤）</span>
+        <span class="email-modal-prize">第三重：抽《主角模式》限定版及精美周邊<span class="email-modal-prize-note">（帆布袋、書籤）</span></span>
       </div>
       <form class="email-capture-form" novalidate>
         <label class="email-capture-label" for="giveawayEmail">Email</label>
@@ -1929,41 +1934,8 @@
     </div>
   </section>
 
-  <!-- 三大特色 -->
-  <section class="features-icons" id="app-features">
-    <div class="features-grid">
-      <article class="feature-card" data-reveal data-reveal-delay="0">
-        <div class="feature-icon-wrap">
-          <img src="images/tools-icon.svg" alt="">
-        </div>
-        <div class="feature-shell">
-          <h3 class="feature-title">實用工具</h3>
-          <p class="feature-desc">方法、技巧</p>
-        </div>
-      </article>
-      <article class="feature-card" data-reveal data-reveal-delay="90">
-        <div class="feature-icon-wrap">
-          <img src="images/重塑觀念.svg" alt="">
-        </div>
-        <div class="feature-shell">
-          <h3 class="feature-title">重塑觀念</h3>
-          <p class="feature-desc">思維、框架</p>
-        </div>
-      </article>
-      <article class="feature-card" data-reveal data-reveal-delay="180">
-        <div class="feature-icon-wrap">
-          <img src="images/閱讀素養.svg" alt="">
-        </div>
-        <div class="feature-shell">
-          <h3 class="feature-title">閱讀素養</h3>
-          <p class="feature-desc">養成判斷力<br>執行力</p>
-        </div>
-      </article>
-    </div>
-  </section>
-
   <!-- 如何幫助你 / 比較表 -->
-  <section class="impact-section" id="impact">
+  <section class="impact-section" id="app-features">
     <div class="impact-intro" data-reveal>
       <h2 class="impact-title">【樊登說書】如何幫助你</h2>
       <div class="impact-divider"></div>
