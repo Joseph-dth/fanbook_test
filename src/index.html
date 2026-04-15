@@ -10,12 +10,10 @@
 <script>document.documentElement.classList.add('motion-ready');</script>
 <style>
   :root {
-    --bg-hero-start: #ffffff;
-    --bg-hero-end: #fff8e8;
     --bg-video: #121212;
-    --bg-impact-start: #fff0bf;
-    --bg-impact-end: #fff8e8;
-    --bg-domains: #fff6d8;
+    --section-bg-white: #fffdfa;
+    --section-bg-cream: #f6ecd8;
+    --section-bg-honey: #efddb0;
   }
   html { scroll-behavior: smooth; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -494,7 +492,12 @@
     overflow: hidden;
     text-align: center;
     padding: 2.5rem 1.25rem 1.25rem;
-    background: linear-gradient(180deg, #fffdf9 0%, var(--bg-hero-end) 100%);
+    background:
+      radial-gradient(58% 44% at 50% 8%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.08) 58%, transparent 78%),
+      var(--section-bg-white);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.92),
+      inset 0 -1px 0 rgba(176, 145, 91, 0.16);
   }
   .intro-hero::before {
     content: '';
@@ -617,15 +620,39 @@
   }
 
   /* ===== Section 4-6: 幫助你 / 比較表 / CTA ===== */
+  .app-benefits-section {
+    position: relative;
+    overflow: hidden;
+    padding: 34px 12px 42px;
+    background:
+      radial-gradient(78% 34% at 16% 12%, rgba(255, 251, 236, 0.56) 0%, rgba(255, 251, 236, 0.12) 52%, transparent 76%),
+      radial-gradient(32% 20% at 88% 18%, rgba(233, 206, 140, 0.26) 0%, rgba(233, 206, 140, 0.08) 52%, transparent 76%),
+      var(--section-bg-cream);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      inset 0 -1px 0 rgba(184, 142, 78, 0.18);
+  }
+  .app-benefits-section::before {
+    content: '';
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    top: 56px;
+    height: 170px;
+    background: radial-gradient(circle at center, rgba(255, 246, 222, 0.72) 0%, rgba(255, 246, 222, 0.18) 42%, transparent 72%);
+    pointer-events: none;
+  }
   .impact-section {
     position: relative;
     overflow: hidden;
-    padding: 34px 12px 66px;
+    padding: 38px 12px 66px;
     background:
-      radial-gradient(92% 32% at 12% 15%, rgba(255, 248, 220, 0.74) 0%, rgba(255, 248, 220, 0.2) 48%, transparent 74%),
-      radial-gradient(52% 24% at 92% 8%, rgba(255, 241, 191, 0.82) 0%, rgba(255, 241, 191, 0.16) 54%, transparent 76%),
-      radial-gradient(40% 24% at 92% 90%, rgba(255, 234, 171, 0.62) 0%, rgba(255, 234, 171, 0.12) 58%, transparent 78%),
-      linear-gradient(180deg, var(--bg-impact-start) 0%, var(--bg-impact-end) 100%);
+      radial-gradient(92% 32% at 12% 15%, rgba(249, 244, 229, 0.42) 0%, rgba(249, 244, 229, 0.1) 48%, transparent 74%),
+      radial-gradient(52% 24% at 92% 8%, rgba(236, 221, 184, 0.16) 0%, rgba(236, 221, 184, 0.06) 54%, transparent 76%),
+      var(--section-bg-white);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      inset 0 -1px 0 rgba(185, 145, 75, 0.18);
   }
   .impact-section::before {
     content: '';
@@ -641,7 +668,7 @@
     position: relative;
     z-index: 1;
     max-width: 820px;
-    margin: 3rem auto 30px;
+    margin: 0 auto 30px;
   }
   .app-benefits-head {
     position: relative;
@@ -975,10 +1002,13 @@
     overflow: hidden;
     padding: 44px 12px 62px;
     background:
-      radial-gradient(44% 20% at 10% 16%, rgba(255, 241, 177, 0.68) 0%, rgba(255, 241, 177, 0.16) 54%, transparent 78%),
-      radial-gradient(22% 14% at 95% 2%, rgba(255, 248, 220, 0.84) 0%, rgba(255, 248, 220, 0.18) 58%, transparent 76%),
-      radial-gradient(32% 24% at 96% 98%, rgba(255, 231, 161, 0.72) 0%, rgba(255, 231, 161, 0.14) 56%, transparent 76%),
-      linear-gradient(180deg, #fff9e8 0%, var(--bg-domains) 46%, #fffaf0 100%);
+      radial-gradient(44% 20% at 10% 16%, rgba(255, 246, 208, 0.54) 0%, rgba(255, 246, 208, 0.14) 54%, transparent 78%),
+      radial-gradient(22% 14% at 95% 2%, rgba(255, 253, 243, 0.62) 0%, rgba(255, 253, 243, 0.16) 58%, transparent 76%),
+      radial-gradient(32% 24% at 96% 98%, rgba(216, 178, 87, 0.18) 0%, rgba(216, 178, 87, 0.08) 56%, transparent 76%),
+      var(--section-bg-honey);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.78),
+      inset 0 -1px 0 rgba(185, 145, 75, 0.18);
   }
   .domains-showcase::before {
     content: '';
@@ -1140,7 +1170,10 @@
 
   .bottom-cta {
     padding: 0 14px 72px;
-    background: linear-gradient(180deg, #fff7df 0%, #f0d18a 100%);
+    background:
+      radial-gradient(42% 26% at 50% 0%, rgba(255, 245, 217, 0.28) 0%, rgba(255, 245, 217, 0.08) 62%, transparent 82%),
+      var(--section-bg-cream);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
   }
   .bottom-cta-inner {
     max-width: 960px;
@@ -1186,9 +1219,12 @@
     overflow: hidden;
     padding: 42px 14px 62px;
     background:
-      radial-gradient(52% 34% at 14% 18%, rgba(255, 244, 196, 0.72) 0%, rgba(255, 244, 196, 0.18) 56%, transparent 78%),
-      radial-gradient(34% 24% at 88% 10%, rgba(255, 253, 243, 0.88) 0%, rgba(255, 253, 243, 0.14) 58%, transparent 78%),
-      linear-gradient(180deg, #fff8e8 0%, #f4dc9e 100%);
+      radial-gradient(52% 34% at 14% 18%, rgba(255, 248, 219, 0.58) 0%, rgba(255, 248, 219, 0.16) 56%, transparent 78%),
+      radial-gradient(34% 24% at 88% 10%, rgba(255, 255, 255, 0.54) 0%, rgba(255, 255, 255, 0.12) 58%, transparent 78%),
+      var(--section-bg-honey);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.82),
+      inset 0 -1px 0 rgba(174, 133, 62, 0.18);
   }
   .event-preview-head {
     position: relative;
@@ -1225,11 +1261,14 @@
     object-position: 68% 26%;
   }
   .event-preview-content {
-    text-align: left;
+    display: grid;
+    justify-items: center;
+    text-align: center;
   }
   .event-preview-content .event-preview-copy {
+    width: min(100%, 33rem);
     max-width: none;
-    margin: 0;
+    margin: 0 auto;
   }
   .event-preview-kicker {
     display: block;
@@ -1252,19 +1291,26 @@
     line-height: 1.8;
     font-weight: 700;
     color: #5f4a2b;
+    text-align: left;
   }
   .event-preview-copy + .event-preview-copy {
     margin-top: 0.95rem;
   }
   .event-preview-meta {
-    margin-top: 1rem;
+    width: min(100%, 33rem);
+    margin: 1rem auto 0;
     font-size: clamp(1rem, 2.8vw, 1.18rem);
     line-height: 1.65;
     font-weight: 700;
     color: #8f5c1f;
   }
   .event-preview-cta {
-    margin-top: 1.4rem;
+    margin: 1.4rem auto 0;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0 0.2em;
     padding: 1rem 1.6rem;
     border: 0;
     border-radius: 999px;
@@ -1285,6 +1331,10 @@
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,0.24),
       0 1.1rem 1.8rem rgba(160, 116, 38, 0.22);
+  }
+  .event-preview-cta-chunk {
+    display: inline-block;
+    white-space: nowrap;
   }
   @media (hover: hover) and (pointer: fine) {
     .domain-panel:hover {
@@ -1307,11 +1357,18 @@
 
   @media (max-width: 420px) {
     .impact-section {
-      padding: 24px 10px 46px;
+      padding: 26px 10px 46px;
     }
     .impact-section::before {
       top: 52px;
       height: 160px;
+    }
+    .app-benefits-section {
+      padding: 24px 10px 30px;
+    }
+    .app-benefits-section::before {
+      top: 42px;
+      height: 138px;
     }
     .impact-divider {
       margin: 12px auto 16px;
@@ -1407,6 +1464,10 @@
       margin: 0 auto;
       border-radius: 1.5rem;
     }
+    .event-preview-content {
+      width: min(100%, 21rem);
+      margin: 0 auto;
+    }
     .event-preview-cta {
       width: 100%;
       max-width: 20rem;
@@ -1458,6 +1519,13 @@
     }
     .intro-hero-composition {
       max-width: 36rem;
+    }
+    .app-benefits-section {
+      padding: 52px 30px 48px;
+    }
+    .app-benefits-section::before {
+      top: 64px;
+      height: 220px;
     }
     .impact-section {
       padding: 52px 30px 96px;
@@ -1682,7 +1750,7 @@
         <p class="event-preview-copy">華文說書領航人樊登將攜手李蕾、金鉑等重量級講師，帶你一同解讀「樂趣」的密碼。</p>
         <p class="event-preview-copy">無論是職場、育兒、情感還是健康，人生的種種困惑，都能在閱讀中找到答案、找到力量、找到下一步</p>
         <p class="event-preview-meta">4 月 23 日 19:00，鎖定 @樊登讀書、@CMoney理財寶 YouTube 頻道直播！</p>
-        <button class="event-preview-cta" type="button" data-open-email-modal>現在留下 Email，預約直播拿三重好禮</button>
+        <button class="event-preview-cta" type="button" data-open-email-modal><span class="event-preview-cta-chunk">現在留下 Email，</span><span class="event-preview-cta-chunk">預約直播拿三重好禮</span></button>
       </div>
     </div>
   </section>
@@ -1705,8 +1773,8 @@
     </div>
   </section>
 
-  <!-- 如何幫助你 / 比較表 -->
-  <section class="impact-section" id="app-features">
+  <!-- 如何幫助你 -->
+  <section class="app-benefits-section" id="app-features">
     <div class="app-benefits-head" data-reveal>
       <h2 class="app-benefits-title">樊登說書 APP，如何幫助你？</h2>
     </div>
@@ -1736,7 +1804,10 @@
         </div>
       </article>
     </div>
+  </section>
 
+  <!-- 有什麼不一樣 -->
+  <section class="impact-section" id="app-compare">
     <div class="impact-intro" data-reveal>
       <h2 class="impact-title">樊登說書 APP，有什麼不一樣？</h2>
     </div>
