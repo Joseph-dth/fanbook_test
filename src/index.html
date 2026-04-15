@@ -11,6 +11,7 @@
 <style>
   :root {
     --bg-video: #121212;
+    --hero-fallback-bg: #fdd100;
     --section-bg-white: #fffdfa;
     --section-bg-cream: #f6ecd8;
     --section-bg-honey: #efddb0;
@@ -429,6 +430,7 @@
 
   /* ===== Hero ===== */
   .hero {
+    --hero-shell-bg: #080808;
     position: relative;
     width: 100vw;
     margin-left: calc(50% - 50vw);
@@ -436,7 +438,7 @@
     overflow: hidden;
     background:
       radial-gradient(70% 80% at 50% 42%, rgba(255, 219, 140, 0.1) 0%, rgba(255, 219, 140, 0) 72%),
-      #080808;
+      var(--hero-shell-bg);
   }
   .hero::before {
     content: '';
@@ -452,16 +454,15 @@
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
-    min-height: 22rem;
     overflow: hidden;
     pointer-events: none;
-    background: #080808;
+    background: var(--hero-shell-bg);
   }
   .hero-media iframe {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 430%;
+    width: 100%;
     height: 100%;
     border: 0;
     transform: translate(-50%, -50%);
@@ -476,7 +477,7 @@
     opacity: 0;
     overflow: hidden;
     pointer-events: none;
-    background: #fdd100;
+    background: var(--hero-fallback-bg);
   }
   .hero-media-fallback::after {
     content: '';
@@ -487,10 +488,14 @@
   .hero-media-fallback img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    object-position: center;
   }
   .hero-media.is-fallback iframe {
     opacity: 0;
+  }
+  .hero-media.is-fallback {
+    background: var(--hero-fallback-bg);
   }
   .hero-media.is-fallback .hero-media-fallback {
     opacity: 1;
@@ -659,9 +664,7 @@
     border-radius: 2rem;
     overflow: hidden;
     background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255, 247, 225, 0.98) 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.92),
-      0 1.2rem 2.3rem rgba(143, 98, 34, 0.16);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.92);
   }
   .intro-hero-image {
     width: 100%;
@@ -671,7 +674,13 @@
     object-position: 68% 20%;
   }
   .intro-hero-sign {
-    display: none;
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    width: 35%;
+    max-width: 120px;
+    height: auto;
+    pointer-events: none;
   }
 
   /* ===== Section 4-6: 幫助你 / 比較表 / CTA ===== */
@@ -748,13 +757,9 @@
     max-width: 980px;
     margin: 0 auto;
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
-  }
-  .app-benefit-row {
-    display: grid;
-    gap: 1rem;
-    align-items: center;
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 1.75rem;
     border: 1px solid rgba(210, 170, 94, 0.36);
     background:
@@ -763,6 +768,22 @@
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,0.88),
       0 1rem 2rem rgba(173, 130, 49, 0.12);
+  }
+  .app-benefit-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+    padding: 0;
+  }
+  .app-benefit-copy-shell {
+    order: 1;
+    width: 100%;
+    min-height: 8.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
   .app-benefit-media {
     order: 2;
@@ -781,8 +802,8 @@
     display: block;
   }
   .app-benefit-copy {
-    order: 1;
     padding: 0.35rem 0.2rem;
+    text-align: center;
   }
   .app-benefit-copy p {
     margin: 0;
@@ -1232,7 +1253,6 @@
     display: none;
   }
   .domain-book-title--tight {
-    font-size: inherit;
     line-height: inherit;
     letter-spacing: inherit;
     white-space: normal;
@@ -1265,6 +1285,7 @@
     font-weight: 900;
     color: #6d4314;
     letter-spacing: 0.03em;
+    white-space: nowrap;
   }
   .bottom-cta-button {
     margin-top: 1.15rem;
@@ -1438,6 +1459,12 @@
     .app-benefits-section {
       padding: 24px 10px 30px;
     }
+    .app-benefits {
+      grid-template-columns: 1fr;
+    }
+    .app-benefit-copy-shell {
+      min-height: auto;
+    }
     .app-benefits-section::before {
       top: 42px;
       height: 138px;
@@ -1553,7 +1580,7 @@
       border-radius: 1.5rem;
     }
     .bottom-cta-title {
-      font-size: clamp(1.25rem, 5.8vw, 1.55rem);
+      font-size: clamp(1.15rem, 5.4vw, 1.55rem);
       line-height: 1.2;
       letter-spacing: 0.02em;
     }
@@ -1566,6 +1593,15 @@
   }
 
   @media (max-width: 767px) {
+    .hero {
+      --hero-shell-bg: var(--hero-fallback-bg);
+    }
+    .hero-media iframe {
+      display: none;
+    }
+    .hero-media-fallback {
+      opacity: 1;
+    }
     .app-benefits-title-break {
       display: block;
     }
@@ -1586,11 +1622,12 @@
       margin-right: 0;
     }
     .hero-media {
-      min-height: clamp(30rem, 58vw, 48rem);
+      max-width: 960px;
+      margin: 0 auto;
     }
     .hero-media iframe {
-      width: 260%;
-      height: 110%;
+      width: 100%;
+      height: 100%;
     }
     .hero-overlay {
       gap: 1.15rem;
@@ -1637,28 +1674,13 @@
     }
     .app-benefits {
       gap: 1.8rem;
+      padding: 2rem;
     }
     .app-benefit-media {
       width: min(100%, 16rem);
     }
     .app-benefit-row {
-      grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
-      gap: 2rem;
-      padding: 1.4rem;
-    }
-    .app-benefit-row .app-benefit-media {
-      order: 1;
-      justify-self: center;
-    }
-    .app-benefit-row .app-benefit-copy {
-      order: 2;
-    }
-    .app-benefit-row--reverse .app-benefit-copy {
-      order: 1;
-    }
-    .app-benefit-row--reverse .app-benefit-media {
-      order: 2;
-      justify-self: center;
+      gap: 1rem;
     }
     .impact-title {
       font-size: 50px;
@@ -1891,6 +1913,7 @@
               <img class="intro-hero-image" src="images/Hero/樊登高清.jpg" alt="樊登">
             </picture>
           </div>
+          <img class="intro-hero-sign" src="images/Hero/sign.svg" alt="樊登簽名" loading="lazy">
         </div>
       </div>
     </div>
@@ -1903,19 +1926,23 @@
     </div>
     <div class="app-benefits">
       <article class="app-benefit-row" data-reveal data-reveal-delay="0">
+        <div class="app-benefit-copy-shell">
+          <div class="app-benefit-copy">
+            <p>講稿經過 260 小時打磨，45分鐘完整逐字稿掌握知識</p>
+          </div>
+        </div>
         <div class="app-benefit-media">
           <picture>
             <source srcset="images/app_screen/帆書APP-screen-01.webp" type="image/webp">
             <img src="images/app_screen/帆書APP-screen-01.png" alt="樊登說書 App 逐字稿畫面" loading="lazy" decoding="async">
           </picture>
         </div>
-        <div class="app-benefit-copy">
-          <p>講稿經過 260 小時打磨，45分鐘完整逐字稿掌握知識</p>
-        </div>
       </article>
-      <article class="app-benefit-row app-benefit-row--reverse" data-reveal data-reveal-delay="90">
-        <div class="app-benefit-copy">
-          <p>一張心智圖，梳理全書結構</p>
+      <article class="app-benefit-row" data-reveal data-reveal-delay="90">
+        <div class="app-benefit-copy-shell">
+          <div class="app-benefit-copy">
+            <p>一張心智圖，梳理全書結構</p>
+          </div>
         </div>
         <div class="app-benefit-media">
           <picture>
@@ -1925,14 +1952,16 @@
         </div>
       </article>
       <article class="app-benefit-row" data-reveal data-reveal-delay="180">
+        <div class="app-benefit-copy-shell">
+          <div class="app-benefit-copy">
+            <p>自己客製化播放清單，主題學習不中斷</p>
+          </div>
+        </div>
         <div class="app-benefit-media">
           <picture>
             <source srcset="images/app_screen/帆書APP-screen-04.webp" type="image/webp">
             <img src="images/app_screen/帆書APP-screen-04.png" alt="樊登說書 App 播放清單畫面" loading="lazy" decoding="async">
           </picture>
-        </div>
-        <div class="app-benefit-copy">
-          <p>自己客製化播放清單，主題學習不中斷</p>
         </div>
       </article>
     </div>
@@ -2118,7 +2147,7 @@
 
   <section class="bottom-cta" id="bottom-cta">
     <div class="bottom-cta-inner" data-reveal>
-      <h2 class="bottom-cta-title">獲取搶先體驗APP之限量名額！</h2>
+      <h2 class="bottom-cta-title">獲取搶先體驗App限量名額！</h2>
       <button class="bottom-cta-button" type="button" data-open-email-modal>現在留下 Email，預約直播拿三重好禮</button>
     </div>
   </section>
