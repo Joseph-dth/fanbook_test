@@ -158,13 +158,18 @@
     box-shadow: 0 0 0 0.25rem rgba(246, 202, 72, 0.16);
   }
   .email-modal-title {
-    max-width: 24rem;
+    max-width: 26rem;
     margin: 1rem auto 0;
-    font-size: clamp(1.9rem, 5.4vw, 2.6rem);
-    line-height: 1.08;
+    font-size: clamp(1.7rem, 4.7vw, 2.25rem);
+    line-height: 1.12;
     font-weight: 700;
     color: #6d4314;
     letter-spacing: 0.03em;
+  }
+  .email-modal-title-line {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 0.9em;
   }
   .email-modal-copy {
     max-width: 28rem;
@@ -303,6 +308,13 @@
     .email-modal-panel {
       padding: 1.25rem 1rem 1rem;
       border-radius: 1.4rem;
+    }
+    .email-modal-title {
+      max-width: 19rem;
+      font-size: clamp(1.45rem, 5vw, 1.9rem);
+    }
+    .email-modal-title-line {
+      font-size: 0.82em;
     }
     .email-modal-prize {
       text-align: center;
@@ -676,7 +688,7 @@
   .intro-hero-sign {
     position: absolute;
     bottom: 0.5rem;
-    right: 0.5rem;
+    left: 0.5rem;
     width: 35%;
     max-width: 120px;
     height: auto;
@@ -1834,7 +1846,7 @@
     <div class="email-modal-panel">
       <button class="email-modal-close" type="button" aria-label="關閉預約彈窗">×</button>
       <div class="email-modal-kicker">4/23 樊登年度直播！限量99份好禮！</div>
-      <h2 class="email-modal-title" id="emailModalTitle">馬上填寫信箱，<br>預約直播拿三重好禮</h2>
+      <h2 class="email-modal-title" id="emailModalTitle">馬上填寫信箱，<br><span class="email-modal-title-line">預約直播拿三重好禮</span></h2>
       <div class="email-modal-prizes" aria-hidden="true">
         <span class="email-modal-prize"><span class="email-modal-prize-label">第一重</span><span class="email-modal-prize-copy">樊登說書《納瓦爾寶典》影音＋心智圖</span></span>
         <span class="email-modal-prize"><span class="email-modal-prize-label">第二重</span><span class="email-modal-prize-copy">樊登說書 APP 上線專屬優惠</span></span>
@@ -1928,7 +1940,7 @@
       <article class="app-benefit-row" data-reveal data-reveal-delay="0">
         <div class="app-benefit-copy-shell">
           <div class="app-benefit-copy">
-            <p>講稿經過 260 小時打磨，45分鐘完整逐字稿掌握知識</p>
+            <p>講稿經過 260 小時打磨，<br>完整逐字稿掌握知識</p>
           </div>
         </div>
         <div class="app-benefit-media">
@@ -1941,7 +1953,7 @@
       <article class="app-benefit-row" data-reveal data-reveal-delay="90">
         <div class="app-benefit-copy-shell">
           <div class="app-benefit-copy">
-            <p>一張心智圖，梳理全書結構</p>
+            <p>一張心智圖，<br>梳理全書結構</p>
           </div>
         </div>
         <div class="app-benefit-media">
@@ -1954,7 +1966,7 @@
       <article class="app-benefit-row" data-reveal data-reveal-delay="180">
         <div class="app-benefit-copy-shell">
           <div class="app-benefit-copy">
-            <p>自己客製化播放清單，主題學習不中斷</p>
+            <p>自己客製化播放清單，<br>主題學習不中斷</p>
           </div>
         </div>
         <div class="app-benefit-media">
@@ -2166,26 +2178,17 @@
     var emailInput = document.querySelector('.email-capture-input');
     var emailFeedback = document.querySelector('.email-capture-feedback');
     var openEmailModalButtons = document.querySelectorAll('[data-open-email-modal]');
-    var familyDomainPanel = null;
-    var familyDomainPanels = document.querySelectorAll('.domain-panel');
     var heroMedia = document.querySelector('.hero-media');
     var heroVideoIframe = document.getElementById('heroVideo');
     var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var persistGiveawayDismissal = false;
     var giveawayStorageKey = 'fanbookGiveawayModalDismissed';
     var emailModalDelayTimer = null;
-    var familyDomainTimer = null;
-    var familyDomainObserver = null;
+    var emailModalFinalThirdTriggered = false;
+    var emailModalAutoTriggerDisabled = false;
+    var emailModalFinalThirdListenerAttached = false;
     var heroAutoplayBootstrapTimer = null;
-    var heroAutoplayResultTimer = null;
     var heroPlaybackStarted = false;
-    for (var i = 0; i < familyDomainPanels.length; i += 1) {
-      var familyDomainLabel = familyDomainPanels[i].querySelector('.domain-tab');
-      if (familyDomainLabel && familyDomainLabel.textContent.trim() === '親子家庭') {
-        familyDomainPanel = familyDomainPanels[i];
-        break;
-      }
-    }
     var readStorage = function (key) {
       if (!persistGiveawayDismissal) return null;
       try {
@@ -2200,20 +2203,18 @@
         if (window.sessionStorage) window.sessionStorage.setItem(key, value);
       } catch (error) {}
     };
-    var clearFamilyDomainTimer = function () {
-      if (!familyDomainTimer) return;
-      window.clearTimeout(familyDomainTimer);
-      familyDomainTimer = null;
+    var shouldSkipEmailModalAutoOpen = function () {
+      return emailModalAutoTriggerDisabled || !!readStorage(giveawayStorageKey);
+    };
+    var clearEmailModalDelayTimer = function () {
+      if (!emailModalDelayTimer) return;
+      window.clearTimeout(emailModalDelayTimer);
+      emailModalDelayTimer = null;
     };
     var clearHeroAutoplayBootstrapTimer = function () {
       if (!heroAutoplayBootstrapTimer) return;
       window.clearTimeout(heroAutoplayBootstrapTimer);
       heroAutoplayBootstrapTimer = null;
-    };
-    var clearHeroAutoplayResultTimer = function () {
-      if (!heroAutoplayResultTimer) return;
-      window.clearTimeout(heroAutoplayResultTimer);
-      heroAutoplayResultTimer = null;
     };
     var setHeroFallback = function (shouldShow) {
       if (!heroMedia) return;
@@ -2222,14 +2223,28 @@
     var markHeroPlaybackStarted = function () {
       heroPlaybackStarted = true;
       clearHeroAutoplayBootstrapTimer();
-      clearHeroAutoplayResultTimer();
       setHeroFallback(false);
     };
     var markHeroPlaybackFailed = function () {
       clearHeroAutoplayBootstrapTimer();
-      clearHeroAutoplayResultTimer();
       if (heroPlaybackStarted) return;
       setHeroFallback(true);
+    };
+    var hasScrolledIntoFinalThird = function () {
+      var scrollRoot = document.documentElement;
+      var scrollableDistance = Math.max(scrollRoot.scrollHeight - window.innerHeight, 0);
+      if (!scrollableDistance) return false;
+      return window.scrollY >= scrollableDistance * (2 / 3);
+    };
+    var maybeOpenEmailModalOnFinalThird = function () {
+      if (emailModalFinalThirdTriggered || shouldSkipEmailModalAutoOpen() || document.body.classList.contains('modal-open')) return;
+      if (!hasScrolledIntoFinalThird()) return;
+      emailModalFinalThirdTriggered = true;
+      if (emailModalFinalThirdListenerAttached) {
+        window.removeEventListener('scroll', maybeOpenEmailModalOnFinalThird);
+        emailModalFinalThirdListenerAttached = false;
+      }
+      openEmailModal();
     };
     var queueYouTubeIframeApiReady = function (callback) {
       if (window.YT && typeof window.YT.Player === 'function') {
@@ -2280,10 +2295,6 @@
           events: {
             onReady: function (event) {
               clearHeroAutoplayBootstrapTimer();
-              clearHeroAutoplayResultTimer();
-              heroAutoplayResultTimer = window.setTimeout(function () {
-                markHeroPlaybackFailed();
-              }, 2500);
               try {
                 event.target.mute();
                 event.target.playVideo();
@@ -2308,28 +2319,28 @@
       });
     };
     var teardownEmailModalTriggers = function () {
-      if (emailModalDelayTimer) {
-        window.clearTimeout(emailModalDelayTimer);
-        emailModalDelayTimer = null;
+      clearEmailModalDelayTimer();
+      if (emailModalFinalThirdListenerAttached) {
+        window.removeEventListener('scroll', maybeOpenEmailModalOnFinalThird);
+        emailModalFinalThirdListenerAttached = false;
       }
-      clearFamilyDomainTimer();
-      if (familyDomainObserver) {
-        familyDomainObserver.disconnect();
-        familyDomainObserver = null;
-      }
+    };
+    var disableEmailModalAutoTriggers = function () {
+      emailModalAutoTriggerDisabled = true;
+      teardownEmailModalTriggers();
     };
     var closeEmailModal = function (markDismissed) {
       document.body.classList.remove('modal-open');
       if (emailModal) emailModal.setAttribute('aria-hidden', 'true');
       if (emailModalBackdrop) emailModalBackdrop.hidden = true;
-      if (markDismissed) {
+      if (markDismissed && persistGiveawayDismissal) {
         writeStorage(giveawayStorageKey, '1');
-        teardownEmailModalTriggers();
+        disableEmailModalAutoTriggers();
       }
     };
     var openEmailModal = function () {
-      if (!emailModal || !emailModalBackdrop || readStorage(giveawayStorageKey) || document.body.classList.contains('modal-open')) return;
-      teardownEmailModalTriggers();
+      if (!emailModal || !emailModalBackdrop || document.body.classList.contains('modal-open')) return;
+      clearEmailModalDelayTimer();
       document.body.classList.add('modal-open');
       emailModal.setAttribute('aria-hidden', 'false');
       emailModalBackdrop.hidden = false;
@@ -2346,29 +2357,15 @@
     });
 
     if (emailModal && emailModalBackdrop && emailModalPanel) {
-      if (!readStorage(giveawayStorageKey)) {
-        emailModalDelayTimer = window.setTimeout(openEmailModal, 15000);
-        if (familyDomainPanel && 'IntersectionObserver' in window) {
-          familyDomainObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-              if (readStorage(giveawayStorageKey) || document.body.classList.contains('modal-open')) {
-                teardownEmailModalTriggers();
-                return;
-              }
-              if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
-                if (!familyDomainTimer) {
-                  familyDomainTimer = window.setTimeout(openEmailModal, 2000);
-                }
-              } else {
-                clearFamilyDomainTimer();
-              }
-            });
-          }, {
-            threshold: [0.45, 0.7],
-            rootMargin: '0px 0px -8% 0px'
-          });
-          familyDomainObserver.observe(familyDomainPanel);
-        }
+      if (!shouldSkipEmailModalAutoOpen()) {
+        emailModalDelayTimer = window.setTimeout(function () {
+          emailModalDelayTimer = null;
+          if (shouldSkipEmailModalAutoOpen()) return;
+          openEmailModal();
+        }, 2000);
+        window.addEventListener('scroll', maybeOpenEmailModalOnFinalThird, { passive: true });
+        emailModalFinalThirdListenerAttached = true;
+        maybeOpenEmailModalOnFinalThird();
       }
 
       if (emailModalClose) {
@@ -2422,12 +2419,14 @@
             if (res.ok) {
               emailFeedback.textContent = '登記完成，請留意 4/20 與 4/23 的 Email 通知。';
               writeStorage('fanbookGiveawayDraftEmail', trimmedEmail);
+              disableEmailModalAutoTriggers();
               window.setTimeout(function () {
                 closeEmailModal(true);
               }, 900);
             } else if (res.status === 409) {
               emailFeedback.textContent = '此 Email 已登記過囉！請留意信箱通知。';
               writeStorage('fanbookGiveawayDraftEmail', trimmedEmail);
+              disableEmailModalAutoTriggers();
               window.setTimeout(function () {
                 closeEmailModal(true);
               }, 900);
