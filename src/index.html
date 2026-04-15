@@ -13,11 +13,9 @@
     --bg-hero-start: #ffffff;
     --bg-hero-end: #fff8e8;
     --bg-video: #121212;
-    --bg-features: #fff7e1;
     --bg-impact-start: #fff0bf;
     --bg-impact-end: #fff8e8;
     --bg-domains: #fff6d8;
-    --bg-subscription: #efd38b;
   }
   html { scroll-behavior: smooth; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,250 +24,52 @@
   [data-reveal] { --reveal-delay: 0ms; }
   section[id] { scroll-margin-top: 6rem; }
 
-  /* ===== Top Nav ===== */
-  .top-nav {
-    position: sticky;
-    top: 0;
-    z-index: 80;
-    background: rgba(255, 255, 255, 0.84);
-    backdrop-filter: blur(16px);
+  .launch-strip {
+    position: relative;
+    z-index: 90;
+    background: rgba(255, 255, 255, 0.96);
     border-bottom: 1px solid rgba(193, 160, 96, 0.18);
-    box-shadow: 0 14px 26px rgba(133, 100, 34, 0.06);
+    box-shadow: 0 12px 22px rgba(133, 100, 34, 0.06);
   }
-  .top-nav-inner {
-    width: min(100%, 1280px);
+  .launch-strip-inner {
+    width: min(100%, 1200px);
     margin: 0 auto;
-    padding: 0.85rem 1.25rem;
-    display: grid;
-    grid-template-columns: auto 1fr;
+    padding: 0.9rem 1.15rem;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 1.25rem;
+    justify-content: center;
+    gap: 0.72rem;
+    text-align: center;
   }
-  .top-nav-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    text-decoration: none;
-    color: #402611;
+  .launch-strip-lead {
+    color: #9a7540;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
   }
-  .top-nav-brand-mark {
-    width: 3rem;
-    height: 3rem;
-    flex: 0 0 auto;
-    border-radius: 1rem;
+  .launch-strip-brand {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 0.85rem;
     overflow: hidden;
-    background: #ffca15;
-    box-shadow: 0 10px 18px rgba(143, 98, 34, 0.14);
+    flex: 0 0 auto;
+    box-shadow: 0 8px 14px rgba(143, 98, 34, 0.12);
   }
-  .top-nav-brand-mark img {
+  .launch-strip-brand img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  .top-nav-brand-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.05;
-  }
-  .top-nav-brand-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-  }
-  .top-nav-brand-subtitle {
-    display: none;
-  }
-  .top-nav-links {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.6rem;
-    min-width: 0;
-  }
-  .top-nav-links a,
-  .top-nav-actions a {
-    position: relative;
-    text-decoration: none;
-    color: #604521;
-    font-size: 0.98rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    transition: color 180ms ease;
-  }
-  .top-nav-links a::after,
-  .top-nav-actions .top-nav-text-link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -0.35rem;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(191, 141, 55, 0) 0%, rgba(191, 141, 55, 0.88) 50%, rgba(191, 141, 55, 0) 100%);
-    transform: scaleX(0.25);
-    opacity: 0;
-    transition: transform 180ms ease, opacity 180ms ease;
-  }
-  .top-nav-links a:hover,
-  .top-nav-actions a:hover {
-    color: #8c5a1f;
-  }
-  .top-nav-links a:hover::after,
-  .top-nav-actions .top-nav-text-link:hover::after {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-  .top-nav-actions {
-    display: none;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 0.75rem;
-  }
-  .top-nav-menu-btn {
-    display: none;
-    width: 3.1rem;
-    height: 3.1rem;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(183, 145, 78, 0.24);
-    border-radius: 1rem;
-    background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(252, 246, 234, 0.94) 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.7),
-      0 10px 18px rgba(143, 98, 34, 0.08);
-    color: #6a4616;
-    cursor: pointer;
-    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
-  }
-  .top-nav-menu-btn:hover {
-    transform: translateY(-1px);
-    border-color: rgba(183, 145, 78, 0.34);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.74),
-      0 14px 22px rgba(143, 98, 34, 0.12);
-  }
-  .top-nav-menu-btn-bar {
-    position: relative;
-    width: 1.2rem;
-    height: 2px;
-    border-radius: 999px;
-    background: currentColor;
-    transition: background 180ms ease;
-  }
-  .top-nav-menu-btn-bar::before,
-  .top-nav-menu-btn-bar::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 1.2rem;
-    height: 2px;
-    border-radius: 999px;
-    background: currentColor;
-    transition: transform 220ms ease, top 220ms ease, opacity 180ms ease;
-  }
-  .top-nav-menu-btn-bar::before { top: -0.36rem; }
-  .top-nav-menu-btn-bar::after { top: 0.36rem; }
-  body.nav-open .top-nav-menu-btn-bar {
-    background: transparent;
-  }
-  body.nav-open .top-nav-menu-btn-bar::before {
-    top: 0;
-    transform: rotate(45deg);
-  }
-  body.nav-open .top-nav-menu-btn-bar::after {
-    top: 0;
-    transform: rotate(-45deg);
-  }
-  .nav-drawer-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 88;
-    background: rgba(43, 28, 10, 0.14);
-    backdrop-filter: blur(4px);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 220ms ease;
-  }
-  .nav-drawer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 89;
-    width: min(26rem, 92vw);
-    height: 100dvh;
-    background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255, 249, 236, 0.98) 100%);
-    border-left: 1px solid rgba(190, 149, 73, 0.18);
-    box-shadow: -24px 0 40px rgba(109, 70, 21, 0.12);
-    transform: translateX(100%);
-    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .nav-drawer-inner {
-    height: 100%;
-    padding: 1.5rem 1.4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.1rem;
-  }
-  .nav-drawer-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-  }
-  .nav-drawer-title {
-    color: #9a7540;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-  .nav-drawer-close {
-    width: 2.5rem;
-    height: 2.5rem;
-    border: 1px solid rgba(183, 145, 78, 0.24);
-    border-radius: 0.9rem;
-    background: rgba(255, 255, 255, 0.8);
-    color: #6a4616;
-    font: inherit;
-    font-size: 1.35rem;
-    line-height: 1;
-    cursor: pointer;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.72),
-      0 0.7rem 1.3rem rgba(143, 98, 34, 0.08);
-  }
-  .nav-drawer-links {
-    display: grid;
-    gap: 0.8rem;
-  }
-  .nav-drawer-links a {
-    display: block;
-    padding: 0.95rem 1rem;
-    border-radius: 1rem;
-    border: 1px solid rgba(214, 184, 119, 0.48);
-    background: rgba(255, 255, 255, 0.88);
-    color: #5d401a;
+  .launch-strip-copy {
+    color: #4e3314;
     font-size: 1rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
-    text-decoration: none;
-    box-shadow: 0 0.8rem 1.6rem rgba(143, 98, 34, 0.08);
-    transition: transform 180ms ease, border-color 180ms ease, color 180ms ease;
+    letter-spacing: 0.02em;
   }
-  .nav-drawer-links a:hover {
-    transform: translateX(-0.15rem);
-    border-color: rgba(183, 145, 78, 0.56);
-    color: #8c5a1f;
-  }
-  body.nav-open,
+
   body.modal-open {
     overflow: hidden;
-  }
-  body.nav-open .nav-drawer-backdrop {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  body.nav-open .nav-drawer {
-    transform: translateX(0);
   }
 
   .email-modal-backdrop {
@@ -385,6 +185,13 @@
     display: block;
     margin-top: 0.08rem;
   }
+  .email-modal-prize-value {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: #a06b24;
+  }
   .email-capture-form {
     width: min(100%, 29rem);
     margin: 1.55rem auto 0;
@@ -466,41 +273,17 @@
     transform: none;
   }
 
-  @media (max-width: 900px) {
-    .top-nav-inner {
-      grid-template-columns: auto auto;
-      justify-content: space-between;
-    }
-    .top-nav-links {
-      display: none;
-    }
-    .top-nav-actions {
-      display: flex;
-    }
-    .top-nav-menu-btn {
-      display: inline-flex;
-    }
-  }
   @media (max-width: 560px) {
-    .top-nav-inner {
-      padding: 0.75rem 0.95rem;
-      gap: 0.75rem;
+    .launch-strip-inner {
+      padding: 0.78rem 0.95rem;
+      gap: 0.55rem;
     }
-    .top-nav-brand-mark {
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 0.85rem;
+    .launch-strip-lead,
+    .launch-strip-copy {
+      width: 100%;
     }
-    .top-nav-brand-title {
-      font-size: 1rem;
-    }
-    .top-nav-brand-subtitle,
-    .top-nav-links {
-      display: none;
-    }
-    .top-nav-menu-btn {
-      width: 2.85rem;
-      height: 2.85rem;
+    .launch-strip-copy {
+      font-size: 0.94rem;
     }
     .email-modal {
       padding: 0.9rem;
@@ -509,18 +292,19 @@
       padding: 1.25rem 1rem 1rem;
       border-radius: 1.4rem;
     }
+    .hero-cta {
+      width: min(100%, 18rem);
+    }
     .email-capture-row {
       gap: 0.62rem;
     }
   }
 
-  .feature-title,
   .compare-main .compare-header,
   .domain-tab {
     position: relative;
     overflow: hidden;
   }
-  .feature-title::before,
   .compare-main .compare-header::before,
   .domain-tab::before {
     content: '';
@@ -579,19 +363,14 @@
   .motion-ready .intro-hero-portrait[data-reveal] {
     transform: translateY(1.15rem);
   }
-  .motion-ready .feature-card[data-reveal] {
-    transform: translateY(1.1rem);
-  }
   .motion-ready .impact-intro[data-reveal],
   .motion-ready .impact-compare[data-reveal],
-  .motion-ready .domains-head[data-reveal],
-  .motion-ready .subscription-note-inner[data-reveal] {
+  .motion-ready .domains-head[data-reveal] {
     transform: translateY(1.1rem);
   }
   .motion-ready .domain-panel[data-reveal] {
     transform: translateY(1.35rem) scale(0.985);
   }
-  .motion-ready .feature-card.is-visible .feature-title::before,
   .motion-ready .impact-compare.is-visible .compare-main .compare-header::before,
   .motion-ready .domain-panel.is-visible .domain-tab::before {
     animation: gentleSheen 1100ms cubic-bezier(0.22, 1, 0.36, 1) calc(var(--reveal-delay) + 160ms) 1 both;
@@ -605,7 +384,6 @@
       transition: none !important;
       will-change: auto !important;
     }
-    .feature-title::before,
     .compare-main .compare-header::before,
     .domain-tab::before {
       animation: none !important;
@@ -694,6 +472,22 @@
     opacity: 0.95;
     line-height: 1.45;
   }
+  .hero-cta {
+    margin-top: 0.3rem;
+    padding: 0.95rem 1.5rem;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #d3a548 0%, #ad7426 100%);
+    color: #fffdf7;
+    font: inherit;
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.24),
+      0 0.9rem 1.6rem rgba(160, 116, 38, 0.18);
+  }
 
   .intro-hero {
     position: relative;
@@ -768,7 +562,7 @@
     margin-top: 1.6rem;
   }
   .intro-hero-composition {
-    max-width: 26rem;
+    max-width: 34rem;
     margin: 0 auto;
   }
   .intro-hero-left {
@@ -802,93 +596,24 @@
     width: 100%;
     position: relative;
   }
+  .intro-hero-portrait-frame {
+    aspect-ratio: 4 / 5;
+    border-radius: 2rem;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255, 247, 225, 0.98) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.92),
+      0 1.2rem 2.3rem rgba(143, 98, 34, 0.16);
+  }
   .intro-hero-image {
     width: 100%;
+    height: 100%;
     display: block;
+    object-fit: cover;
+    object-position: 68% 22%;
   }
   .intro-hero-sign {
-    position: absolute;
-    right: -8%;
-    bottom: 10%;
-    width: 45%;
-  }
-
-  /* ===== Section 3: 三大特色 ===== */
-  .features-icons {
-    position: relative;
-    background:
-      radial-gradient(70% 90% at 50% 0%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 70%),
-      linear-gradient(180deg, var(--bg-features) 0%, #fffaf0 100%);
-    padding: 36px 12px 50px;
-    overflow: hidden;
-  }
-  .features-icons::before {
-    content: '';
-    position: absolute;
-    left: 8%;
-    right: 8%;
-    bottom: 10px;
-    height: 40px;
-    background: transparent;
-    filter: none;
-    pointer-events: none;
-  }
-  .features-grid {
-    position: relative;
-    z-index: 1;
-    max-width: 860px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-    align-items: start;
-  }
-  .feature-card {
-    min-width: 0;
-  }
-  .feature-icon-wrap {
-    position: relative;
-    z-index: 2;
-    width: clamp(62px, 19vw, 94px);
-    margin: 0 auto -6px;
-    filter: drop-shadow(0 8px 12px rgba(109, 70, 21, 0.18));
-  }
-  .feature-icon-wrap img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  .feature-shell {
-    min-height: 118px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 22px;
-    background: linear-gradient(180deg, #fff9eb 0%, #fff0bf 100%);
-    border: 1px solid rgba(214, 184, 119, 0.55);
-    box-shadow: 0 12px 24px rgba(155, 115, 32, 0.12);
-    overflow: hidden;
-  }
-  .feature-title {
-    padding: 14px 6px 12px;
-    border-radius: 20px;
-    background: linear-gradient(180deg, #ffea8c 0%, #ffcb19 100%);
-    box-shadow: inset 0 2px 1px rgba(255,255,255,0.8), 0 4px 12px rgba(197, 144, 28, 0.18);
-    text-align: center;
-    font-size: clamp(16px, 2vw, 24px);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: 1px;
-    color: #6a4616;
-    white-space: nowrap;
-  }
-  .feature-desc {
-    flex: 1;
-    padding: 14px 8px 8px;
-    text-align: center;
-    font-size: clamp(12px, 1.55vw, 18px);
-    font-weight: 700;
-    line-height: 1.45;
-    color: #69523b;
+    display: none;
   }
 
   /* ===== Section 4-6: 幫助你 / 比較表 / CTA ===== */
@@ -916,7 +641,66 @@
     position: relative;
     z-index: 1;
     max-width: 820px;
-    margin: 0 auto 30px;
+    margin: 3rem auto 30px;
+  }
+  .app-benefits-head {
+    position: relative;
+    z-index: 1;
+    max-width: 840px;
+    margin: 0 auto 1.8rem;
+    text-align: center;
+  }
+  .app-benefits-title {
+    font-size: clamp(2rem, 5.6vw, 3.4rem);
+    line-height: 1.16;
+    font-weight: 700;
+    color: #7a4d15;
+    letter-spacing: 0.02em;
+  }
+  .app-benefits {
+    position: relative;
+    z-index: 1;
+    max-width: 980px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.25rem;
+  }
+  .app-benefit-row {
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 1.75rem;
+    border: 1px solid rgba(210, 170, 94, 0.36);
+    background:
+      radial-gradient(80% 120% at 20% 0%, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.08) 54%, rgba(255,255,255,0) 100%),
+      linear-gradient(180deg, rgba(255, 252, 243, 0.98) 0%, rgba(255, 245, 220, 0.98) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.88),
+      0 1rem 2rem rgba(173, 130, 49, 0.12);
+  }
+  .app-benefit-media {
+    border-radius: 1.45rem;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255, 248, 232, 0.98) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.9),
+      0 0.7rem 1.4rem rgba(173, 130, 49, 0.1);
+  }
+  .app-benefit-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .app-benefit-copy {
+    padding: 0.35rem 0.2rem;
+  }
+  .app-benefit-copy p {
+    margin: 0;
+    font-size: clamp(1.05rem, 3vw, 1.52rem);
+    line-height: 1.65;
+    font-weight: 700;
+    color: #5c4624;
   }
   .impact-title {
     margin: 0;
@@ -1285,7 +1069,7 @@
     left: 50%;
     top: -18px;
     transform: translateX(-50%);
-    width: calc(100% - 92px);
+    width: calc(100% - 48px);
     padding: 9px 12px 10px;
     border-radius: 999px;
     text-align: center;
@@ -1335,35 +1119,33 @@
   }
   .domain-book-title {
     margin-top: 8px;
-    font-size: clamp(11px, 2.1vw, 18px);
-    line-height: 1.28;
+    min-height: 2.8em;
+    font-size: clamp(10px, 1.8vw, 16px);
+    line-height: 1.35;
     font-weight: 700;
     color: #6a6863;
-    word-break: keep-all;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
   }
   .domain-book-title--tight {
-    font-size: clamp(7px, 1.55vw, 13px);
-    line-height: 1.2;
-    letter-spacing: -0.05em;
-    white-space: nowrap;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    white-space: normal;
   }
 
-  /* ===== Event Preview ===== */
-  .event-preview {
-    position: relative;
-    overflow: hidden;
-    padding: 38px 14px 54px;
-    background:
-      radial-gradient(52% 34% at 14% 18%, rgba(255, 244, 196, 0.72) 0%, rgba(255, 244, 196, 0.18) 56%, transparent 78%),
-      radial-gradient(34% 24% at 88% 10%, rgba(255, 253, 243, 0.88) 0%, rgba(255, 253, 243, 0.14) 58%, transparent 78%),
-      linear-gradient(180deg, #fff8e8 0%, #f4dc9e 100%);
+  .bottom-cta {
+    padding: 0 14px 72px;
+    background: linear-gradient(180deg, #fff7df 0%, #f0d18a 100%);
   }
-  .event-preview-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 820px;
+  .bottom-cta-inner {
+    max-width: 960px;
     margin: 0 auto;
-    padding: 2.1rem 1.3rem 2rem;
+    padding: 2rem 1.35rem;
     text-align: center;
     border-radius: 2rem;
     border: 1px solid rgba(190, 148, 69, 0.28);
@@ -1374,40 +1156,112 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.84),
       0 1.2rem 2.5rem rgba(158, 119, 53, 0.16);
   }
-  .event-preview-kicker {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.48rem 0.95rem 0.54rem;
+  .bottom-cta-title {
+    font-size: clamp(1.6rem, 4.8vw, 2.8rem);
+    line-height: 1.25;
+    font-weight: 900;
+    color: #6d4314;
+    letter-spacing: 0.03em;
+  }
+  .bottom-cta-button {
+    margin-top: 1.15rem;
+    padding: 1rem 1.6rem;
+    border: 0;
     border-radius: 999px;
-    background: rgba(255, 237, 173, 0.8);
+    background: linear-gradient(135deg, #d3a548 0%, #ad7426 100%);
+    color: #fffdf7;
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.24),
+      0 0.9rem 1.6rem rgba(160, 116, 38, 0.18);
+  }
+
+  /* ===== Event Preview ===== */
+  .event-preview {
+    position: relative;
+    overflow: hidden;
+    padding: 42px 14px 62px;
+    background:
+      radial-gradient(52% 34% at 14% 18%, rgba(255, 244, 196, 0.72) 0%, rgba(255, 244, 196, 0.18) 56%, transparent 78%),
+      radial-gradient(34% 24% at 88% 10%, rgba(255, 253, 243, 0.88) 0%, rgba(255, 253, 243, 0.14) 58%, transparent 78%),
+      linear-gradient(180deg, #fff8e8 0%, #f4dc9e 100%);
+  }
+  .event-preview-head {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto 1.8rem;
+    text-align: center;
+  }
+  .event-preview-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 980px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.4rem;
+    align-items: center;
+  }
+  .event-preview-visual {
+    aspect-ratio: 1;
+    border-radius: 2rem;
+    overflow: hidden;
+    border: 1px solid rgba(190, 148, 69, 0.28);
+    background:
+      radial-gradient(90% 120% at 50% 0%, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.08) 54%, rgba(255, 255, 255, 0) 100%),
+      linear-gradient(180deg, rgba(255, 253, 245, 0.98) 0%, rgba(255, 244, 214, 0.98) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.84),
+      0 1.2rem 2.5rem rgba(158, 119, 53, 0.16);
+  }
+  .event-preview-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 68% 26%;
+  }
+  .event-preview-content {
+    text-align: left;
+  }
+  .event-preview-content .event-preview-copy {
+    max-width: none;
+    margin: 0;
+  }
+  .event-preview-kicker {
+    display: block;
     color: #9b6120;
-    font-size: clamp(0.88rem, 2.6vw, 1rem);
+    font-size: clamp(0.95rem, 2.6vw, 1.08rem);
     font-weight: 700;
     letter-spacing: 0.08em;
   }
   .event-preview-title {
-    margin-top: 1rem;
-    font-size: clamp(1.9rem, 5.4vw, 3rem);
+    margin-top: 0.38rem;
+    font-size: clamp(2rem, 5.6vw, 3.2rem);
     line-height: 1.12;
     font-weight: 900;
     color: #6d4314;
     letter-spacing: 0.04em;
   }
   .event-preview-copy {
-    max-width: 36rem;
-    margin: 1rem auto 0;
+    margin: 0;
     font-size: clamp(1rem, 3vw, 1.32rem);
-    line-height: 1.7;
+    line-height: 1.8;
     font-weight: 700;
     color: #5f4a2b;
   }
-  .event-preview-note {
+  .event-preview-copy + .event-preview-copy {
     margin-top: 0.95rem;
-    font-size: clamp(1.06rem, 3.2vw, 1.42rem);
-    line-height: 1.5;
+  }
+  .event-preview-meta {
+    margin-top: 1rem;
+    font-size: clamp(1rem, 2.8vw, 1.18rem);
+    line-height: 1.65;
     font-weight: 700;
-    color: #9b6120;
+    color: #8f5c1f;
   }
   .event-preview-cta {
     margin-top: 1.4rem;
@@ -1432,36 +1286,6 @@
       inset 0 1px 0 rgba(255,255,255,0.24),
       0 1.1rem 1.8rem rgba(160, 116, 38, 0.22);
   }
-
-  /* ===== Footer: 訂閱聲明 ===== */
-  .subscription-note {
-    padding: 40px 14px 48px;
-    background: linear-gradient(180deg, #f7e6b3 0%, var(--bg-subscription) 100%);
-  }
-  .subscription-note-inner {
-    max-width: 820px;
-    margin: 0 auto;
-  }
-  .subscription-note h2 {
-    margin: 0 0 22px;
-    text-align: center;
-    font-size: clamp(18px, 3.6vw, 34px);
-    line-height: 1.2;
-    font-weight: 700;
-    color: #6b655f;
-  }
-  .subscription-list {
-    margin: 0;
-    padding-left: 1.3em;
-    color: #6b655f;
-  }
-  .subscription-list li {
-    margin-bottom: 10px;
-    font-size: clamp(14px, 2.4vw, 18px);
-    line-height: 1.55;
-    font-weight: 700;
-  }
-
   @media (hover: hover) and (pointer: fine) {
     .domain-panel:hover {
       transform: translateY(-0.35rem);
@@ -1482,29 +1306,6 @@
   }
 
   @media (max-width: 420px) {
-    .features-icons {
-      padding: 26px 10px 34px;
-    }
-    .features-grid {
-      gap: 8px;
-    }
-    .feature-icon-wrap {
-      width: clamp(52px, 19vw, 72px);
-      margin-bottom: -4px;
-    }
-    .feature-shell {
-      min-height: 104px;
-      border-radius: 18px;
-    }
-    .feature-title {
-      padding: 12px 4px 10px;
-      border-radius: 16px;
-      letter-spacing: 0.5px;
-    }
-    .feature-desc {
-      padding: 12px 6px 6px;
-      line-height: 1.35;
-    }
     .impact-section {
       padding: 24px 10px 46px;
     }
@@ -1578,7 +1379,7 @@
     }
     .domain-tab {
       top: -16px;
-      width: calc(100% - 76px);
+      width: calc(100% - 32px);
       padding: 8px 10px 9px;
     }
     .domain-icon {
@@ -1595,29 +1396,27 @@
     .event-preview {
       padding: 28px 10px 36px;
     }
+    .event-preview-head {
+      margin-bottom: 1.25rem;
+    }
     .event-preview-inner {
-      padding: 1.75rem 1rem 1.6rem;
+      gap: 1rem;
+    }
+    .event-preview-visual {
+      max-width: 21rem;
+      margin: 0 auto;
       border-radius: 1.5rem;
-    }
-    .event-preview-title {
-      margin-top: 0.82rem;
-    }
-    .event-preview-copy {
-      margin-top: 0.85rem;
     }
     .event-preview-cta {
       width: 100%;
       max-width: 20rem;
     }
-    .subscription-note {
-      padding: 30px 12px 34px;
+    .bottom-cta {
+      padding: 0 10px 42px;
     }
-    .subscription-note h2 {
-      margin-bottom: 16px;
-    }
-    .subscription-list li {
-      margin-bottom: 8px;
-      line-height: 1.5;
+    .bottom-cta-inner {
+      padding: 1.65rem 1rem;
+      border-radius: 1.5rem;
     }
   }
 
@@ -1658,31 +1457,7 @@
       font-size: 1.35rem;
     }
     .intro-hero-composition {
-      max-width: 28rem;
-    }
-    .features-icons { padding: 44px 24px 58px; }
-    .features-grid {
-      max-width: 960px;
-      grid-template-columns: repeat(3, minmax(220px, 280px));
-      justify-content: center;
-      gap: 28px;
-    }
-    .feature-icon-wrap {
-      width: 96px;
-      margin-bottom: -8px;
-    }
-    .feature-shell {
-      min-height: 148px;
-      border-radius: 26px;
-    }
-    .feature-title {
-      padding: 16px 10px 13px;
-      border-radius: 22px;
-      font-size: 22px;
-    }
-    .feature-desc {
-      padding: 18px 12px 12px;
-      font-size: 16px;
+      max-width: 36rem;
     }
     .impact-section {
       padding: 52px 30px 96px;
@@ -1690,6 +1465,23 @@
     .impact-section::before {
       top: 76px;
       height: 240px;
+    }
+    .app-benefits-head {
+      margin-bottom: 2.2rem;
+    }
+    .app-benefits {
+      gap: 1.8rem;
+    }
+    .app-benefit-row {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      padding: 1.4rem;
+    }
+    .app-benefit-row--reverse .app-benefit-copy {
+      order: 1;
+    }
+    .app-benefit-row--reverse .app-benefit-media {
+      order: 2;
     }
     .impact-title {
       font-size: 50px;
@@ -1778,7 +1570,7 @@
     }
     .domain-tab {
       top: -20px;
-      width: calc(100% - 132px);
+      width: calc(100% - 72px);
       padding: 11px 16px 12px;
       font-size: 26px;
     }
@@ -1797,9 +1589,12 @@
     .event-preview {
       padding: 56px 28px 70px;
     }
+    .event-preview-head {
+      margin-bottom: 2.4rem;
+    }
     .event-preview-inner {
-      padding: 2.8rem 2.5rem 2.55rem;
-      border-radius: 2.25rem;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: 2.3rem;
     }
     .event-preview-title {
       font-size: 3.2rem;
@@ -1807,84 +1602,40 @@
     .event-preview-copy {
       font-size: 1.28rem;
     }
-    .event-preview-note {
-      font-size: 1.38rem;
-    }
     .event-preview-cta {
       font-size: 1.06rem;
       padding: 1.05rem 1.9rem;
     }
-    .subscription-note {
-      padding: 52px 28px 58px;
+    .bottom-cta {
+      padding: 0 28px 76px;
     }
-    .subscription-note-inner {
-      max-width: 980px;
-    }
-    .subscription-note h2 {
-      margin-bottom: 26px;
-      font-size: 24px;
-    }
-    .subscription-list {
-      max-width: 920px;
-      margin: 0 auto;
-    }
-    .subscription-list li {
-      margin-bottom: 12px;
-      font-size: 17px;
+    .bottom-cta-inner {
+      padding: 2.45rem 2rem;
+      border-radius: 2.25rem;
     }
   }
 </style>
 </head>
 <body>
-<header class="top-nav">
-  <div class="top-nav-inner">
-    <a class="top-nav-brand" href="#home" aria-label="回到首頁">
-      <span class="top-nav-brand-mark">
-        <img src="images/logo.png" alt="樊登說書標誌">
-      </span>
-      <span class="top-nav-brand-text">
-        <span class="top-nav-brand-title">樊登說書</span>
-      </span>
-    </a>
-    <nav class="top-nav-links" aria-label="主導覽">
-      <a href="#home">首頁</a>
-      <a href="#about">樊登簡介</a>
-      <a href="#app-features">樊登說書APP特色</a>
-      <a href="#event">活動預告</a>
-    </nav>
-    <div class="top-nav-actions">
-      <button class="top-nav-menu-btn" type="button" aria-label="開啟選單" aria-expanded="false" aria-controls="nav-drawer">
-        <span class="top-nav-menu-btn-bar" aria-hidden="true"></span>
-      </button>
-    </div>
+<header class="launch-strip">
+  <div class="launch-strip-inner">
+    <span class="launch-strip-lead">華文說書首選</span>
+    <span class="launch-strip-brand">
+      <img src="images/logo.png" alt="樊登說書標誌">
+    </span>
+    <span class="launch-strip-copy">樊登說書 App 繁體版正式上市！</span>
   </div>
 </header>
-  <div class="nav-drawer-backdrop" hidden></div>
-  <aside class="nav-drawer" id="nav-drawer" aria-hidden="true">
-    <div class="nav-drawer-inner">
-      <div class="nav-drawer-header">
-        <p class="nav-drawer-title">選單</p>
-        <button class="nav-drawer-close" type="button" aria-label="關閉選單">×</button>
-      </div>
-      <nav class="nav-drawer-links" aria-label="手機選單">
-        <a href="#home">首頁</a>
-        <a href="#about">樊登簡介</a>
-        <a href="#app-features">樊登說書APP特色</a>
-        <a href="#event">活動預告</a>
-      </nav>
-    </div>
-  </aside>
   <div class="email-modal-backdrop" hidden></div>
   <div class="email-modal" aria-hidden="true" aria-labelledby="emailModalTitle" role="dialog" aria-modal="true">
     <div class="email-modal-panel">
       <button class="email-modal-close" type="button" aria-label="關閉預約彈窗">×</button>
       <div class="email-modal-kicker">4/23 樊登年度直播！限量99份好禮！</div>
-      <h2 class="email-modal-title" id="emailModalTitle">馬上填寫信箱，<br>三重好禮等你拿</h2>
-      <p class="email-modal-copy">現在留下 Email，預約直播拿三重好禮。</p>
+      <h2 class="email-modal-title" id="emailModalTitle">馬上填寫信箱，<br>預約直播拿三重好禮</h2>
       <div class="email-modal-prizes" aria-hidden="true">
         <span class="email-modal-prize">第一重：樊登說書《納瓦爾寶典》影音＋心智圖</span>
         <span class="email-modal-prize">第二重：樊登說書 APP 上線專屬優惠</span>
-        <span class="email-modal-prize">第三重：抽《主角模式》限定版及精美周邊<span class="email-modal-prize-note">（帆布袋、書籤）</span></span>
+        <span class="email-modal-prize">第三重：抽《主角模式》限定版及精美周邊<span class="email-modal-prize-note">（帆布袋、書籤）</span><small class="email-modal-prize-value">價值 $699</small></span>
       </div>
       <form class="email-capture-form" novalidate>
         <label class="email-capture-label" for="giveawayEmail">Email</label>
@@ -1913,7 +1664,26 @@
     </div>
     <div class="hero-overlay" data-reveal data-reveal-delay="80">
       <h1 class="hero-title">樊登說書</h1>
-      <p class="hero-subtitle">最有感的成長，從聽書開始</p>
+      <p class="hero-subtitle">全繁體介面APP重磅上線<br>4/23 同步直播樊登年度演講</p>
+      <button class="hero-cta" type="button" data-open-email-modal>預約直播拿好禮</button>
+    </div>
+  </section>
+
+  <section class="event-preview" id="event">
+    <div class="event-preview-head" data-reveal>
+      <div class="event-preview-kicker">4/23 世界閱讀日年度演講</div>
+      <h2 class="event-preview-title">知識進化論｜樂趣的力量</h2>
+    </div>
+    <div class="event-preview-inner" data-reveal data-reveal-delay="90">
+      <div class="event-preview-visual">
+        <img src="images/Hero/樊登高清.jpg" alt="4/23 世界閱讀日年度演講主視覺">
+      </div>
+      <div class="event-preview-content">
+        <p class="event-preview-copy">華文說書領航人樊登將攜手李蕾、金鉑等重量級講師，帶你一同解讀「樂趣」的密碼。</p>
+        <p class="event-preview-copy">無論是職場、育兒、情感還是健康，人生的種種困惑，都能在閱讀中找到答案、找到力量、找到下一步</p>
+        <p class="event-preview-meta">4 月 23 日 19:00，鎖定 @樊登讀書、@CMoney理財寶 YouTube 頻道直播！</p>
+        <button class="event-preview-cta" type="button" data-open-email-modal>現在留下 Email，預約直播拿三重好禮</button>
+      </div>
     </div>
   </section>
 
@@ -1927,8 +1697,9 @@
     <div class="intro-hero-portrait" data-reveal data-reveal-delay="120">
       <div class="intro-hero-composition">
         <div class="intro-hero-center">
-          <img class="intro-hero-image" src="images/Hero/樊登.svg" alt="樊登">
-          <img class="intro-hero-sign" src="images/Hero/sign.svg" alt="簽名">
+          <div class="intro-hero-portrait-frame">
+            <img class="intro-hero-image" src="images/Hero/樊登高清.jpg" alt="樊登">
+          </div>
         </div>
       </div>
     </div>
@@ -1936,14 +1707,38 @@
 
   <!-- 如何幫助你 / 比較表 -->
   <section class="impact-section" id="app-features">
+    <div class="app-benefits-head" data-reveal>
+      <h2 class="app-benefits-title">樊登說書 APP，如何幫助你？</h2>
+    </div>
+    <div class="app-benefits">
+      <article class="app-benefit-row" data-reveal data-reveal-delay="0">
+        <div class="app-benefit-media">
+          <img src="images/app_screen/帆書APP-screen-01.png" alt="樊登說書 App 逐字稿畫面">
+        </div>
+        <div class="app-benefit-copy">
+          <p>講稿經過 260 小時打磨，45分鐘完整逐字稿掌握知識</p>
+        </div>
+      </article>
+      <article class="app-benefit-row app-benefit-row--reverse" data-reveal data-reveal-delay="90">
+        <div class="app-benefit-copy">
+          <p>一張心智圖，梳理全書結構</p>
+        </div>
+        <div class="app-benefit-media">
+          <img src="images/app_screen/帆書APP-screen-03.png" alt="樊登說書 App 心智圖畫面">
+        </div>
+      </article>
+      <article class="app-benefit-row" data-reveal data-reveal-delay="180">
+        <div class="app-benefit-media">
+          <img src="images/app_screen/帆書APP-screen-04.png" alt="樊登說書 App 播放清單畫面">
+        </div>
+        <div class="app-benefit-copy">
+          <p>自己客製化播放清單，主題學習不中斷</p>
+        </div>
+      </article>
+    </div>
+
     <div class="impact-intro" data-reveal>
-      <h2 class="impact-title">【樊登說書】如何幫助你</h2>
-      <div class="impact-divider"></div>
-      <div class="impact-questions">
-        <p>通勤時間，除了滑手機還能做什麼？</p>
-        <p>我喜歡閱讀，但找不到時間？</p>
-        <p>知道閱讀有價值，卻很難讀完一整本書？</p>
-      </div>
+      <h2 class="impact-title">樊登說書 APP，有什麼不一樣？</h2>
     </div>
 
     <div class="impact-compare" data-reveal data-reveal-delay="120">
@@ -1969,10 +1764,6 @@
           </div>
         </article>
       </div>
-
-      <div class="impact-cta">
-        <p>每天堅持聽書<br>知識就如同複利般增長</p>
-      </div>
     </div>
   </section>
 
@@ -1980,12 +1771,11 @@
   <section class="domains-showcase" id="domains">
     <div class="domains-head" data-reveal>
       <h2 class="domains-heading">暢聽七大領域，解決人生問題</h2>
-      <div class="domains-pill">每週持續新書上架</div>
+      <div class="domains-pill">書單持續更新中</div>
     </div>
 
     <div class="domains-list">
       <article class="domain-panel" data-reveal data-reveal-delay="0">
-        <img class="domain-icon" src="images/心靈成長.svg" alt="">
         <div class="domain-tab">心靈成長</div>
         <div class="domain-books">
           <div class="domain-book">
@@ -2008,7 +1798,6 @@
       </article>
 
       <article class="domain-panel" data-reveal data-reveal-delay="90">
-        <img class="domain-icon" src="images/職場商業.svg" alt="">
         <div class="domain-tab">職場商業</div>
         <div class="domain-books">
           <div class="domain-book">
@@ -2031,7 +1820,6 @@
       </article>
 
       <article class="domain-panel" data-reveal data-reveal-delay="180">
-        <img class="domain-icon" src="images/親子家庭.svg" alt="">
         <div class="domain-tab">親子家庭</div>
         <div class="domain-books">
           <div class="domain-book">
@@ -2054,7 +1842,6 @@
       </article>
 
       <article class="domain-panel" data-reveal data-reveal-delay="270">
-        <img class="domain-icon" src="images/人文經典.svg" alt="">
         <div class="domain-tab">人文經典</div>
         <div class="domain-books">
           <div class="domain-book">
@@ -2078,38 +1865,16 @@
     </div>
   </section>
 
-  <section class="event-preview" id="event">
-    <div class="event-preview-inner" data-reveal>
-      <div class="event-preview-kicker">4/23 世界閱讀日年度演講</div>
-      <h2 class="event-preview-title">樂趣的力量</h2>
-      <p class="event-preview-copy">帶你一起，在閱讀中找到答案、找到力量、找到下一步</p>
-      <p class="event-preview-note">現在留下 Email，預約直播拿三重好禮</p>
-      <button class="event-preview-cta" type="button" data-open-email-modal>立即預約&gt;&gt;</button>
-    </div>
-  </section>
-
-  <!-- 訂閱與自動續費聲明 -->
-  <section class="subscription-note" id="terms">
-    <div class="subscription-note-inner" data-reveal>
-      <h2>訂閱與自動續費聲明</h2>
-      <ul class="subscription-list">
-        <li>扣款確認：確認購買後，款項將從您的應用程式商店帳戶（Apple ID 或 Google Play 帳戶）扣除。</li>
-        <li>自動續訂：本服務採自動續訂機制。系統會在當前訂閱期結束前 24 小時內進行扣款，扣款成功後訂閱週期將自動順延。</li>
-        <li>取消訂閱：若需取消續訂，請在當前訂閱期結束至少 24 小時前，手動於您的商店帳戶設定中關閉自動續訂功能。當期已扣款項無法按比例退還。</li>
-        <li>點擊購買即代表您同意我們的《服務條款》與《隱私權政策》。</li>
-      </ul>
+  <section class="bottom-cta">
+    <div class="bottom-cta-inner" data-reveal>
+      <h2 class="bottom-cta-title">獲取搶先體驗APP之限量名額！</h2>
+      <button class="bottom-cta-button" type="button" data-open-email-modal>現在留下 Email，預約直播拿三重好禮</button>
     </div>
   </section>
 
 </div>
 <script>
   (function () {
-    var menuButton = document.querySelector('.top-nav-menu-btn');
-    var drawer = document.querySelector('.nav-drawer');
-    var drawerBackdrop = document.querySelector('.nav-drawer-backdrop');
-    var drawerCloseButton = document.querySelector('.nav-drawer-close');
-    var drawerLinks = document.querySelectorAll('.nav-drawer-links a');
-    var desktopNavQuery = window.matchMedia ? window.matchMedia('(min-width: 901px)') : null;
     var emailModal = document.querySelector('.email-modal');
     var emailModalBackdrop = document.querySelector('.email-modal-backdrop');
     var emailModalPanel = document.querySelector('.email-modal-panel');
@@ -2163,18 +1928,6 @@
         familyDomainObserver = null;
       }
     };
-    var closeDrawer = function () {
-      document.body.classList.remove('nav-open');
-      if (menuButton) menuButton.setAttribute('aria-expanded', 'false');
-      if (drawer) drawer.setAttribute('aria-hidden', 'true');
-      if (drawerBackdrop) drawerBackdrop.hidden = true;
-    };
-    var openDrawer = function () {
-      document.body.classList.add('nav-open');
-      if (menuButton) menuButton.setAttribute('aria-expanded', 'true');
-      if (drawer) drawer.setAttribute('aria-hidden', 'false');
-      if (drawerBackdrop) drawerBackdrop.hidden = false;
-    };
     var closeEmailModal = function (markDismissed) {
       document.body.classList.remove('modal-open');
       if (emailModal) emailModal.setAttribute('aria-hidden', 'true');
@@ -2197,41 +1950,10 @@
       }
     };
 
-    if (menuButton && drawer && drawerBackdrop) {
-      menuButton.addEventListener('click', function () {
-        if (document.body.classList.contains('nav-open')) {
-          closeDrawer();
-        } else {
-          openDrawer();
-        }
-      });
-
-      if (drawerCloseButton) {
-        drawerCloseButton.addEventListener('click', closeDrawer);
-      }
-
-      drawerLinks.forEach(function (link) {
-        link.addEventListener('click', closeDrawer);
-      });
-
-      drawerBackdrop.addEventListener('click', closeDrawer);
-      document.addEventListener('keydown', function (event) {
-        if (event.key !== 'Escape') return;
-        if (document.body.classList.contains('modal-open')) closeEmailModal(true);
-        if (document.body.classList.contains('nav-open')) closeDrawer();
-      });
-
-      if (desktopNavQuery) {
-        var handleDesktopNavChange = function (event) {
-          if (event.matches) closeDrawer();
-        };
-        if (desktopNavQuery.addEventListener) {
-          desktopNavQuery.addEventListener('change', handleDesktopNavChange);
-        } else if (desktopNavQuery.addListener) {
-          desktopNavQuery.addListener(handleDesktopNavChange);
-        }
-      }
-    }
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape') return;
+      if (document.body.classList.contains('modal-open')) closeEmailModal(true);
+    });
 
     if (emailModal && emailModalBackdrop && emailModalPanel) {
       if (!readStorage(giveawayStorageKey)) {
