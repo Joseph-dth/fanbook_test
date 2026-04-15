@@ -766,6 +766,8 @@
   }
   .app-benefit-media {
     order: 2;
+    width: min(100%, 14rem);
+    margin: 0 auto;
     border-radius: 1.45rem;
     overflow: hidden;
     background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255, 248, 232, 0.98) 100%);
@@ -1578,6 +1580,11 @@
       max-width: 1200px;
       margin: 0 auto;
     }
+    .hero {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
     .hero-media {
       min-height: clamp(30rem, 58vw, 48rem);
     }
@@ -1631,13 +1638,17 @@
     .app-benefits {
       gap: 1.8rem;
     }
+    .app-benefit-media {
+      width: min(100%, 16rem);
+    }
     .app-benefit-row {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
       gap: 2rem;
       padding: 1.4rem;
     }
     .app-benefit-row .app-benefit-media {
       order: 1;
+      justify-self: center;
     }
     .app-benefit-row .app-benefit-copy {
       order: 2;
@@ -1647,6 +1658,7 @@
     }
     .app-benefit-row--reverse .app-benefit-media {
       order: 2;
+      justify-self: center;
     }
     .impact-title {
       font-size: 50px;
@@ -2041,7 +2053,7 @@
     </div>
   </section>
 
-  <section class="bottom-cta">
+  <section class="bottom-cta" id="bottom-cta">
     <div class="bottom-cta-inner" data-reveal>
       <h2 class="bottom-cta-title">獲取搶先體驗APP之限量名額！</h2>
       <button class="bottom-cta-button" type="button" data-open-email-modal>現在留下 Email，預約直播拿三重好禮</button>
@@ -2051,6 +2063,9 @@
 </div>
 <script>
   (function () {
+    var SUPABASE_URL = 'https://lhxwbvqihjmtaalwhqfr.supabase.co';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxoeHdidnFpaGptdGFhbHdocWZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDQ3NjIsImV4cCI6MjA5MTgyMDc2Mn0.U9BMpWhDOAIOGARkYxuKyPSEtZNRn-xtGPgLvGQo31k';
+
     var emailModal = document.querySelector('.email-modal');
     var emailModalBackdrop = document.querySelector('.email-modal-backdrop');
     var emailModalPanel = document.querySelector('.email-modal-panel');
@@ -2296,11 +2311,44 @@
             return;
           }
 
-          emailFeedback.textContent = '登記完成，請留意 4/20 與 4/23 的 Email 通知。';
-          writeStorage('fanbookGiveawayDraftEmail', emailInput.value.trim());
-          window.setTimeout(function () {
-            closeEmailModal(true);
-          }, 900);
+          var submitBtn = emailForm.querySelector('.email-capture-submit');
+          if (submitBtn) submitBtn.disabled = true;
+          emailFeedback.textContent = '登記中…';
+
+          var trimmedEmail = emailInput.value.trim();
+
+          fetch(SUPABASE_URL + '/rest/v1/email_signups', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+              'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify({ email: trimmedEmail })
+          }).then(function (res) {
+            if (res.ok) {
+              emailFeedback.textContent = '登記完成，請留意 4/20 與 4/23 的 Email 通知。';
+              writeStorage('fanbookGiveawayDraftEmail', trimmedEmail);
+              window.setTimeout(function () {
+                closeEmailModal(true);
+              }, 900);
+            } else if (res.status === 409) {
+              emailFeedback.textContent = '此 Email 已登記過囉！請留意信箱通知。';
+              writeStorage('fanbookGiveawayDraftEmail', trimmedEmail);
+              window.setTimeout(function () {
+                closeEmailModal(true);
+              }, 900);
+            } else {
+              emailFeedback.textContent = '登記失敗，請稍後再試。';
+              emailFeedback.classList.add('is-error');
+            }
+          }).catch(function () {
+            emailFeedback.textContent = '網路錯誤，請稍後再試。';
+            emailFeedback.classList.add('is-error');
+          }).finally(function () {
+            if (submitBtn) submitBtn.disabled = false;
+          });
         });
       }
     }
@@ -2342,6 +2390,227 @@
         revealObserver.observe(node);
       }
     });
+  })();
+</script>
+<script>
+  (function () {
+    var SUPABASE_URL = 'https://lhxwbvqihjmtaalwhqfr.supabase.co';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxoeHdidnFpaGptdGFhbHdocWZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDQ3NjIsImV4cCI6MjA5MTgyMDc2Mn0.U9BMpWhDOAIOGARkYxuKyPSEtZNRn-xtGPgLvGQo31k';
+    var FLUSH_INTERVAL_MS = 10000;
+
+    // --- Anonymous ID ---
+    var anonymousId;
+    try {
+      anonymousId = localStorage.getItem('fanbook_anonymous_id');
+      if (!anonymousId) {
+        anonymousId = crypto.randomUUID ? crypto.randomUUID() : ('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+          var r = Math.random() * 16 | 0;
+          return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        }));
+        localStorage.setItem('fanbook_anonymous_id', anonymousId);
+      }
+    } catch (e) {
+      anonymousId = 'unknown-' + Date.now();
+    }
+
+    // --- Parse URL params ---
+    var params = new URLSearchParams(window.location.search);
+    var utmSource = params.get('utm_source');
+    var utmMedium = params.get('utm_medium');
+    var utmCampaign = params.get('utm_campaign');
+    var utmContent = params.get('utm_content');
+    var customRef = params.get('from') || params.get('ref');
+
+    // --- Device detection ---
+    var screenW = window.screen ? window.screen.width : null;
+    var screenH = window.screen ? window.screen.height : null;
+    var deviceType = (function () {
+      var w = screenW || window.innerWidth;
+      if (w < 768) return 'mobile';
+      if (w < 1024) return 'tablet';
+      return 'desktop';
+    })();
+
+    // --- Supabase helpers ---
+    var supabaseHeadersMinimal = {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+      'Prefer': 'return=minimal'
+    };
+
+    // --- Generate session ID client-side (RLS blocks SELECT, so we can't use return=representation) ---
+    var generateUUID = function () {
+      return crypto.randomUUID ? crypto.randomUUID() : ('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0;
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+      }));
+    };
+
+    // --- Create session ---
+    var sessionId = generateUUID();
+    var sessionPayload = {
+      id: sessionId,
+      anonymous_id: anonymousId,
+      referrer: document.referrer || null,
+      utm_source: utmSource,
+      utm_medium: utmMedium,
+      utm_campaign: utmCampaign,
+      utm_content: utmContent,
+      custom_ref: customRef,
+      device_type: deviceType,
+      screen_width: screenW,
+      screen_height: screenH,
+      language: navigator.language || null,
+      user_agent: navigator.userAgent || null
+    };
+
+    fetch(SUPABASE_URL + '/rest/v1/sessions', {
+      method: 'POST',
+      headers: supabaseHeadersMinimal,
+      body: JSON.stringify(sessionPayload)
+    }).catch(function () {});
+
+    // --- Fire-and-forget POST (works during page unload via keepalive) ---
+    var postToSupabase = function (table, payload, keepalive) {
+      try {
+        fetch(SUPABASE_URL + '/rest/v1/' + table, {
+          method: 'POST',
+          headers: supabaseHeadersMinimal,
+          body: JSON.stringify(payload),
+          keepalive: !!keepalive
+        }).catch(function () {});
+      } catch (e) {}
+    };
+
+    // --- Event tracking ---
+    var trackEvent = function (eventName, metadata, keepalive) {
+      postToSupabase('events', {
+        session_id: sessionId,
+        anonymous_id: anonymousId,
+        event_name: eventName,
+        metadata: metadata || {}
+      }, keepalive);
+    };
+
+    // --- CTA click tracking ---
+    document.querySelectorAll('[data-open-email-modal]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var label = btn.classList.contains('hero-cta') ? 'hero_cta'
+          : btn.classList.contains('event-preview-cta') ? 'event_preview_cta'
+          : btn.classList.contains('bottom-cta-button') ? 'bottom_cta'
+          : 'unknown';
+        trackEvent('cta_click', { button: label });
+      });
+    });
+
+    // --- Email modal open/close tracking ---
+    var origOpen = window.__fanbookOpenEmailModal;
+    var modalEl = document.querySelector('.email-modal');
+    if (modalEl) {
+      var modalObserverAttr = new MutationObserver(function (mutations) {
+        mutations.forEach(function (m) {
+          if (m.attributeName !== 'aria-hidden') return;
+          var hidden = modalEl.getAttribute('aria-hidden') === 'true';
+          if (!hidden) {
+            trackEvent('email_modal_open', {});
+          } else {
+            trackEvent('email_modal_close', {});
+          }
+        });
+      });
+      modalObserverAttr.observe(modalEl, { attributes: true, attributeFilter: ['aria-hidden'] });
+    }
+
+    // --- Email submit tracking ---
+    var emailFormEl = document.querySelector('.email-capture-form');
+    if (emailFormEl) {
+      emailFormEl.addEventListener('submit', function () {
+        var input = emailFormEl.querySelector('.email-capture-input');
+        if (input && input.checkValidity()) {
+          trackEvent('email_submit', {});
+        }
+      });
+    }
+
+    // --- Section dwell tracking ---
+    var sectionBuffer = [];
+    var activeSections = {};
+    var TRACKED_SECTIONS = ['home', 'event', 'about', 'app-features', 'app-compare', 'domains', 'bottom-cta'];
+
+    var flushSectionBuffer = function (keepalive) {
+      if (!sectionBuffer.length) return;
+      var payload = sectionBuffer.splice(0, sectionBuffer.length);
+      postToSupabase('section_views', payload, keepalive);
+    };
+
+    if ('IntersectionObserver' in window) {
+      var sectionObserver = new IntersectionObserver(function (entries) {
+        var now = Date.now();
+        entries.forEach(function (entry) {
+          var id = entry.target.id;
+          if (!id) return;
+          if (entry.isIntersecting) {
+            if (!activeSections[id]) {
+              activeSections[id] = now;
+            }
+          } else {
+            if (activeSections[id]) {
+              var dwellMs = now - activeSections[id];
+              if (dwellMs > 500) {
+                sectionBuffer.push({
+                  session_id: sessionId,
+                  anonymous_id: anonymousId,
+                  section_id: id,
+                  enter_at: new Date(activeSections[id]).toISOString(),
+                  dwell_ms: Math.round(dwellMs)
+                });
+              }
+              delete activeSections[id];
+            }
+          }
+        });
+      }, { threshold: 0.3 });
+
+      TRACKED_SECTIONS.forEach(function (sectionId) {
+        var el = document.getElementById(sectionId);
+        if (el) sectionObserver.observe(el);
+      });
+    }
+
+    // --- Periodic flush ---
+    setInterval(function () { flushSectionBuffer(false); }, FLUSH_INTERVAL_MS);
+
+    // --- Flush on page leave ---
+    var flushedOnLeave = false;
+    var flushOnLeave = function () {
+      if (flushedOnLeave) return;
+      flushedOnLeave = true;
+      var now = Date.now();
+      Object.keys(activeSections).forEach(function (id) {
+        var dwellMs = now - activeSections[id];
+        if (dwellMs > 500) {
+          sectionBuffer.push({
+            session_id: sessionId,
+            anonymous_id: anonymousId,
+            section_id: id,
+            enter_at: new Date(activeSections[id]).toISOString(),
+            dwell_ms: Math.round(dwellMs)
+          });
+        }
+      });
+      activeSections = {};
+      flushSectionBuffer(true);
+    };
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') {
+        flushOnLeave();
+      } else {
+        flushedOnLeave = false;
+      }
+    });
+    window.addEventListener('pagehide', flushOnLeave);
   })();
 </script>
 </body>
