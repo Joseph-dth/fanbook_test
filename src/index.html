@@ -15,9 +15,19 @@
     --section-bg-cream: #f6ecd8;
     --section-bg-honey: #efddb0;
   }
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; color: #3a2a1a; background: #fff; }
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    color: #3a2a1a;
+    background: #fff;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
   img { max-width: 100%; display: block; }
   [data-reveal] { --reveal-delay: 0ms; }
   section[id] { scroll-margin-top: 6rem; }
@@ -179,6 +189,9 @@
     line-height: 1.5;
     font-weight: 700;
   }
+  .email-modal-prize-label::after {
+    content: "：";
+  }
   .email-modal-prize-note {
     display: block;
     margin-top: 0.08rem;
@@ -289,6 +302,19 @@
     .email-modal-panel {
       padding: 1.25rem 1rem 1rem;
       border-radius: 1.4rem;
+    }
+    .email-modal-prize {
+      text-align: center;
+    }
+    .email-modal-prize-label {
+      display: block;
+      margin-bottom: 0.08rem;
+    }
+    .email-modal-prize-label::after {
+      content: "";
+    }
+    .email-modal-prize-copy {
+      display: block;
     }
     .hero-cta {
       width: min(100%, 18rem);
@@ -440,6 +466,35 @@
     border: 0;
     transform: translate(-50%, -50%);
   }
+  .hero-media iframe,
+  .hero-media-fallback {
+    transition: opacity 360ms ease;
+  }
+  .hero-media-fallback {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background: #fdd100;
+  }
+  .hero-media-fallback::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+  .hero-media-fallback img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .hero-media.is-fallback iframe {
+    opacity: 0;
+  }
+  .hero-media.is-fallback .hero-media-fallback {
+    opacity: 1;
+  }
   .hero-overlay {
     position: absolute;
     inset: 0;
@@ -491,7 +546,7 @@
     position: relative;
     overflow: hidden;
     text-align: center;
-    padding: 2.5rem 1.25rem 1.25rem;
+    padding: 2.5rem 1.25rem 2.1rem;
     background:
       radial-gradient(58% 44% at 50% 8%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.08) 58%, transparent 78%),
       var(--section-bg-white);
@@ -565,7 +620,7 @@
     margin-top: 1.6rem;
   }
   .intro-hero-composition {
-    max-width: 34rem;
+    max-width: 32rem;
     margin: 0 auto;
   }
   .intro-hero-left {
@@ -600,7 +655,7 @@
     position: relative;
   }
   .intro-hero-portrait-frame {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1;
     border-radius: 2rem;
     overflow: hidden;
     background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255, 247, 225, 0.98) 100%);
@@ -613,7 +668,7 @@
     height: 100%;
     display: block;
     object-fit: cover;
-    object-position: 68% 22%;
+    object-position: 68% 20%;
   }
   .intro-hero-sign {
     display: none;
@@ -684,6 +739,9 @@
     color: #7a4d15;
     letter-spacing: 0.02em;
   }
+  .app-benefits-title-break {
+    display: none;
+  }
   .app-benefits {
     position: relative;
     z-index: 1;
@@ -707,6 +765,7 @@
       0 1rem 2rem rgba(173, 130, 49, 0.12);
   }
   .app-benefit-media {
+    order: 2;
     border-radius: 1.45rem;
     overflow: hidden;
     background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255, 248, 232, 0.98) 100%);
@@ -720,6 +779,7 @@
     display: block;
   }
   .app-benefit-copy {
+    order: 1;
     padding: 0.35rem 0.2rem;
   }
   .app-benefit-copy p {
@@ -789,9 +849,12 @@
     justify-content: center;
   }
   .compare-card {
+    --compare-card-radius: 24px;
+    --compare-card-border-width: 2px;
+    --compare-card-inner-radius: calc(var(--compare-card-radius) - var(--compare-card-border-width));
     position: relative;
     background: #fff;
-    border-radius: 24px;
+    border-radius: var(--compare-card-radius);
     box-shadow: 0 12px 28px rgba(182, 151, 73, 0.14);
     transition:
       opacity 760ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -829,8 +892,8 @@
     text-align: center;
     font-weight: 700;
     letter-spacing: 1px;
-    border-top-left-radius: 22px;
-    border-top-right-radius: 22px;
+    border-top-left-radius: var(--compare-card-inner-radius);
+    border-top-right-radius: var(--compare-card-inner-radius);
   }
   .compare-main .compare-header {
     padding: 15px 12px 12px;
@@ -846,8 +909,8 @@
   }
   .compare-rows {
     display: grid;
-    border-bottom-left-radius: 22px;
-    border-bottom-right-radius: 22px;
+    border-bottom-left-radius: var(--compare-card-inner-radius);
+    border-bottom-right-radius: var(--compare-card-inner-radius);
     overflow: hidden;
   }
   .compare-row {
@@ -1154,12 +1217,17 @@
     line-height: 1.35;
     font-weight: 700;
     color: #6a6863;
-    word-break: break-word;
-    overflow-wrap: anywhere;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    word-break: normal;
+    overflow-wrap: normal;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+  }
+  .domain-book-break-mobile {
+    display: none;
   }
   .domain-book-title--tight {
     font-size: inherit;
@@ -1169,7 +1237,7 @@
   }
 
   .bottom-cta {
-    padding: 0 14px 72px;
+    padding: 14px 14px;
     background:
       radial-gradient(42% 26% at 50% 0%, rgba(255, 245, 217, 0.28) 0%, rgba(255, 245, 217, 0.08) 62%, transparent 82%),
       var(--section-bg-cream);
@@ -1389,7 +1457,7 @@
       margin-top: 30px;
     }
     .compare-card {
-      border-radius: 20px;
+      --compare-card-radius: 20px;
     }
     .compare-badge {
       width: 62px;
@@ -1449,6 +1517,7 @@
     }
     .domain-book-title {
       margin-top: 7px;
+      font-size: 10px;
     }
     .event-preview {
       padding: 28px 10px 36px;
@@ -1473,11 +1542,20 @@
       max-width: 20rem;
     }
     .bottom-cta {
-      padding: 0 10px 42px;
+      padding: 12px 10px;
     }
     .bottom-cta-inner {
       padding: 1.65rem 1rem;
       border-radius: 1.5rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .app-benefits-title-break {
+      display: block;
+    }
+    .domain-book-break-mobile {
+      display: block;
     }
   }
 
@@ -1505,7 +1583,7 @@
       font-size: clamp(1.25rem, 1.9vw, 1.65rem);
     }
     .intro-hero {
-      padding: 3.5rem 3.75rem 1.75rem;
+      padding: 3.5rem 3.75rem 2.5rem;
     }
     .intro-hero-heading {
       font-size: 3.4rem;
@@ -1518,7 +1596,7 @@
       font-size: 1.35rem;
     }
     .intro-hero-composition {
-      max-width: 36rem;
+      max-width: 34rem;
     }
     .app-benefits-section {
       padding: 52px 30px 48px;
@@ -1544,6 +1622,12 @@
       grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
       gap: 2rem;
       padding: 1.4rem;
+    }
+    .app-benefit-row .app-benefit-media {
+      order: 1;
+    }
+    .app-benefit-row .app-benefit-copy {
+      order: 2;
     }
     .app-benefit-row--reverse .app-benefit-copy {
       order: 1;
@@ -1675,7 +1759,7 @@
       padding: 1.05rem 1.9rem;
     }
     .bottom-cta {
-      padding: 0 28px 76px;
+      padding: 18px 28px;
     }
     .bottom-cta-inner {
       padding: 2.45rem 2rem;
@@ -1701,9 +1785,9 @@
       <div class="email-modal-kicker">4/23 樊登年度直播！限量99份好禮！</div>
       <h2 class="email-modal-title" id="emailModalTitle">馬上填寫信箱，<br>預約直播拿三重好禮</h2>
       <div class="email-modal-prizes" aria-hidden="true">
-        <span class="email-modal-prize">第一重：樊登說書《納瓦爾寶典》影音＋心智圖</span>
-        <span class="email-modal-prize">第二重：樊登說書 APP 上線專屬優惠</span>
-        <span class="email-modal-prize">第三重：抽《主角模式》限定版及精美周邊<span class="email-modal-prize-note">（帆布袋、書籤）</span><small class="email-modal-prize-value">價值 $699</small></span>
+        <span class="email-modal-prize"><span class="email-modal-prize-label">第一重</span><span class="email-modal-prize-copy">樊登說書《納瓦爾寶典》影音＋心智圖</span></span>
+        <span class="email-modal-prize"><span class="email-modal-prize-label">第二重</span><span class="email-modal-prize-copy">樊登說書 APP 上線專屬優惠</span></span>
+        <span class="email-modal-prize"><span class="email-modal-prize-label">第三重</span><span class="email-modal-prize-copy">抽《主角模式》限定版及精美周邊</span><span class="email-modal-prize-note">（帆布袋、書籤）</span><small class="email-modal-prize-value">價值 $699</small></span>
       </div>
       <form class="email-capture-form" novalidate>
         <label class="email-capture-label" for="giveawayEmail">Email</label>
@@ -1722,13 +1806,17 @@
   <section class="hero" id="home">
     <div class="hero-media" data-reveal>
       <iframe
-        src="https://www.youtube.com/embed/YgDH9DvZm_o?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=YgDH9DvZm_o&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;iv_load_policy=3&amp;fs=0&amp;playsinline=1"
+        id="heroVideo"
+        src="https://www.youtube.com/embed/YgDH9DvZm_o?enablejsapi=1&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=YgDH9DvZm_o&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;iv_load_policy=3&amp;fs=0&amp;playsinline=1"
         title="樊登說書背景影片"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
         loading="eager"
         allowfullscreen
       ></iframe>
+      <div class="hero-media-fallback" aria-hidden="true">
+        <img src="images/logo.png" alt="">
+      </div>
     </div>
     <div class="hero-overlay" data-reveal data-reveal-delay="80">
       <h1 class="hero-title">樊登說書</h1>
@@ -1776,7 +1864,7 @@
   <!-- 如何幫助你 -->
   <section class="app-benefits-section" id="app-features">
     <div class="app-benefits-head" data-reveal>
-      <h2 class="app-benefits-title">樊登說書 APP，如何幫助你？</h2>
+      <h2 class="app-benefits-title">樊登說書 APP，<br class="app-benefits-title-break">如何幫助你？</h2>
     </div>
     <div class="app-benefits">
       <article class="app-benefit-row" data-reveal data-reveal-delay="0">
@@ -1877,7 +1965,7 @@
           </div>
           <div class="domain-book">
             <img src="images/個人成長/18_cover_窮查理的普通常識.png" alt="窮查理的普通常識">
-            <div class="domain-book-title">《窮查理的普通常識》</div>
+            <div class="domain-book-title">《窮查理的<br class="domain-book-break-mobile">普通常識》</div>
           </div>
           <div class="domain-book">
             <img src="images/職場商業/29_cover_低風險創業.jpg" alt="低風險創業">
@@ -1885,7 +1973,7 @@
           </div>
           <div class="domain-book">
             <img src="images/職場商業/id203_巴菲特的勝券在握之道.jpg" alt="巴菲特的勝券在握之道">
-            <div class="domain-book-title">《巴菲特的勝券在握之道》</div>
+            <div class="domain-book-title">《巴菲特的<br class="domain-book-break-mobile">勝券在握之道》</div>
           </div>
         </div>
       </article>
@@ -1895,7 +1983,7 @@
         <div class="domain-books">
           <div class="domain-book">
             <img src="images/親子家庭/135_cover_培養會思考的小孩拷貝.png" alt="培養會思考的小孩">
-            <div class="domain-book-title">《培養會思考的小孩》</div>
+            <div class="domain-book-title">《培養會思考的<br class="domain-book-break-mobile">小孩》</div>
           </div>
           <div class="domain-book">
             <img src="images/親子家庭/13_cover_父母的語言.jpg" alt="父母的語言">
@@ -1903,11 +1991,11 @@
           </div>
           <div class="domain-book">
             <img src="images/親子家庭/7_cover_你就是孩⼦最好的玩具.jpg" alt="你就是孩子最好的玩具">
-            <div class="domain-book-title">《你就是孩子最好的玩具》</div>
+            <div class="domain-book-title">《你就是孩子最好的<br class="domain-book-break-mobile">玩具》</div>
           </div>
           <div class="domain-book">
             <img src="images/親子家庭/132_cover_哈佛媽媽的聰明3C教養法拷貝.png" alt="哈佛媽媽的聰明3C教養法">
-            <div class="domain-book-title domain-book-title--tight">《哈佛媽媽的聰明3C教養法》</div>
+            <div class="domain-book-title domain-book-title--tight">《哈佛媽媽的<br class="domain-book-break-mobile">聰明3C教養法》</div>
           </div>
         </div>
       </article>
@@ -1921,7 +2009,7 @@
           </div>
           <div class="domain-book">
             <img src="images/人文歷史/359_cover_一個世紀的人生課.png" alt="一個世紀的人生課">
-            <div class="domain-book-title">《一個世紀的人生課》</div>
+            <div class="domain-book-title">《一個世紀的<br class="domain-book-break-mobile">人生課》</div>
           </div>
           <div class="domain-book">
             <img src="images/人文歷史/322_cover_底氣.png" alt="底氣">
@@ -1956,12 +2044,17 @@
     var openEmailModalButtons = document.querySelectorAll('[data-open-email-modal]');
     var familyDomainPanel = null;
     var familyDomainPanels = document.querySelectorAll('.domain-panel');
+    var heroMedia = document.querySelector('.hero-media');
+    var heroVideoIframe = document.getElementById('heroVideo');
     var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var persistGiveawayDismissal = false;
     var giveawayStorageKey = 'fanbookGiveawayModalDismissed';
     var emailModalDelayTimer = null;
     var familyDomainTimer = null;
     var familyDomainObserver = null;
+    var heroAutoplayBootstrapTimer = null;
+    var heroAutoplayResultTimer = null;
+    var heroPlaybackStarted = false;
     for (var i = 0; i < familyDomainPanels.length; i += 1) {
       var familyDomainLabel = familyDomainPanels[i].querySelector('.domain-tab');
       if (familyDomainLabel && familyDomainLabel.textContent.trim() === '親子家庭') {
@@ -1987,6 +2080,108 @@
       if (!familyDomainTimer) return;
       window.clearTimeout(familyDomainTimer);
       familyDomainTimer = null;
+    };
+    var clearHeroAutoplayBootstrapTimer = function () {
+      if (!heroAutoplayBootstrapTimer) return;
+      window.clearTimeout(heroAutoplayBootstrapTimer);
+      heroAutoplayBootstrapTimer = null;
+    };
+    var clearHeroAutoplayResultTimer = function () {
+      if (!heroAutoplayResultTimer) return;
+      window.clearTimeout(heroAutoplayResultTimer);
+      heroAutoplayResultTimer = null;
+    };
+    var setHeroFallback = function (shouldShow) {
+      if (!heroMedia) return;
+      heroMedia.classList.toggle('is-fallback', !!shouldShow);
+    };
+    var markHeroPlaybackStarted = function () {
+      heroPlaybackStarted = true;
+      clearHeroAutoplayBootstrapTimer();
+      clearHeroAutoplayResultTimer();
+      setHeroFallback(false);
+    };
+    var markHeroPlaybackFailed = function () {
+      clearHeroAutoplayBootstrapTimer();
+      clearHeroAutoplayResultTimer();
+      if (heroPlaybackStarted) return;
+      setHeroFallback(true);
+    };
+    var queueYouTubeIframeApiReady = function (callback) {
+      if (window.YT && typeof window.YT.Player === 'function') {
+        callback();
+        return;
+      }
+      if (!window.__fanbookYouTubeIframeApiCallbacks) {
+        window.__fanbookYouTubeIframeApiCallbacks = [];
+      }
+      window.__fanbookYouTubeIframeApiCallbacks.push(callback);
+      if (window.__fanbookYouTubeIframeApiLoading) return;
+
+      var previousYouTubeApiReady = window.onYouTubeIframeAPIReady;
+      window.__fanbookYouTubeIframeApiLoading = true;
+      window.onYouTubeIframeAPIReady = function () {
+        if (typeof previousYouTubeApiReady === 'function') {
+          previousYouTubeApiReady();
+        }
+        var callbacks = window.__fanbookYouTubeIframeApiCallbacks ? window.__fanbookYouTubeIframeApiCallbacks.slice() : [];
+        window.__fanbookYouTubeIframeApiCallbacks = [];
+        callbacks.forEach(function (queuedCallback) {
+          queuedCallback();
+        });
+      };
+
+      var youtubeApiScript = document.createElement('script');
+      youtubeApiScript.src = 'https://www.youtube.com/iframe_api';
+      youtubeApiScript.async = true;
+      youtubeApiScript.onerror = function () {
+        markHeroPlaybackFailed();
+      };
+      document.head.appendChild(youtubeApiScript);
+    };
+    var initHeroVideoAutoplayDetection = function () {
+      if (!heroMedia || !heroVideoIframe) return;
+
+      heroAutoplayBootstrapTimer = window.setTimeout(function () {
+        markHeroPlaybackFailed();
+      }, 6000);
+
+      queueYouTubeIframeApiReady(function () {
+        if (!window.YT || typeof window.YT.Player !== 'function') {
+          markHeroPlaybackFailed();
+          return;
+        }
+
+        new window.YT.Player(heroVideoIframe, {
+          events: {
+            onReady: function (event) {
+              clearHeroAutoplayBootstrapTimer();
+              clearHeroAutoplayResultTimer();
+              heroAutoplayResultTimer = window.setTimeout(function () {
+                markHeroPlaybackFailed();
+              }, 2500);
+              try {
+                event.target.mute();
+                event.target.playVideo();
+              } catch (error) {
+                markHeroPlaybackFailed();
+              }
+            },
+            onStateChange: function (event) {
+              if (!window.YT || !window.YT.PlayerState) return;
+              if (event.data === window.YT.PlayerState.PLAYING) {
+                markHeroPlaybackStarted();
+              }
+            },
+            onAutoplayBlocked: function () {
+              markHeroPlaybackFailed();
+            },
+            onError: function () {
+              markHeroPlaybackFailed();
+            }
+          }
+        });
+      });
     };
     var teardownEmailModalTriggers = function () {
       if (emailModalDelayTimer) {
@@ -2092,6 +2287,8 @@
         });
       }
     }
+
+    initHeroVideoAutoplayDetection();
 
     var revealNodes = document.querySelectorAll('[data-reveal]');
     if (!revealNodes.length) return;
