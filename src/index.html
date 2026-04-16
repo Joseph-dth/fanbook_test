@@ -9,6 +9,16 @@
 <title>樊登說書</title>
 <script>document.documentElement.classList.add('motion-ready');</script>
 <style>
+  h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
   :root {
     --bg-video: #121212;
     --hero-fallback-bg: #fdd100;
@@ -391,8 +401,14 @@
   .motion-ready .hero-overlay[data-reveal] {
     transform: translateY(0.95rem);
   }
+  .motion-ready .hero-overlay[data-reveal].is-visible {
+    transform: none;
+  }
   .motion-ready .hero-media[data-reveal] {
     transform: translateY(1rem) scale(0.985);
+  }
+  .motion-ready .hero-media[data-reveal].is-visible {
+    transform: none;
   }
   .motion-ready .intro-hero-copy[data-reveal] {
     transform: translateY(0.95rem);
@@ -447,8 +463,9 @@
     width: 100%;
     margin: 0;
     overflow: hidden;
+    display: grid;
     background:
-      radial-gradient(70% 80% at 50% 42%, rgba(255, 219, 140, 0.1) 0%, rgba(255, 219, 140, 0) 72%),
+      radial-gradient(70% 80% at 50% 50%, rgba(255, 219, 140, 0.1) 0%, rgba(255, 219, 140, 0) 72%),
       var(--hero-shell-bg);
   }
   .hero::before {
@@ -462,6 +479,7 @@
     pointer-events: none;
   }
   .hero-media {
+    grid-area: 1 / 1;
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -512,8 +530,7 @@
     opacity: 1;
   }
   .hero-overlay {
-    position: absolute;
-    inset: 0;
+    grid-area: 1 / 1;
     z-index: 2;
     display: flex;
     flex-direction: column;
@@ -1606,6 +1623,13 @@
   @media (max-width: 767px) {
     .hero {
       --hero-shell-bg: var(--hero-fallback-bg);
+      min-height: 25vh;
+    }
+    .hero::before {
+      background: rgba(0, 0, 0, 0.22);
+    }
+    .hero-media {
+      aspect-ratio: auto;
     }
     .hero-media iframe {
       display: none;
