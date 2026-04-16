@@ -444,9 +444,8 @@
   .hero {
     --hero-shell-bg: #080808;
     position: relative;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    width: 100%;
+    margin: 0;
     overflow: hidden;
     background:
       radial-gradient(70% 80% at 50% 42%, rgba(255, 219, 140, 0.1) 0%, rgba(255, 219, 140, 0) 72%),
@@ -1608,11 +1607,24 @@
     .hero {
       --hero-shell-bg: var(--hero-fallback-bg);
     }
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      aspect-ratio: auto;
+    }
     .hero-media iframe {
       display: none;
     }
     .hero-media-fallback {
       opacity: 1;
+    }
+    .hero-media-fallback img {
+      object-fit: cover;
+    }
+    .hero-overlay {
+      position: relative;
+      inset: auto;
+      padding: 3rem 1.5rem;
     }
     .app-benefits-title-break {
       display: block;
@@ -1630,12 +1642,11 @@
     }
     .hero {
       width: 100%;
-      margin-left: 0;
-      margin-right: 0;
+      margin: 0;
     }
     .hero-media {
-      max-width: 960px;
-      margin: 0 auto;
+      max-width: none;
+      margin: 0;
     }
     .hero-media iframe {
       width: 100%;
